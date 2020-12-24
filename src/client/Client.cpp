@@ -1,13 +1,9 @@
-#include <cstdlib>
-
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <unistd.h>
 
 #include "exceptions/socket.h"
 #include "util/overlap.h"
-
-#include "api/Socket.h"
 
 #include "Client.h"
 

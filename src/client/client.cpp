@@ -2,7 +2,6 @@
 #include <string> 
 #include <exception>
 
-#include "../dfsconfig.h"
 #include "Client.h"
 #include "../sockio/SocketFileReader.h"
 
@@ -12,10 +11,6 @@
 
 
 int main(int argc, char const *argv[]) {
-    std::cout << argv[0]
-              << " v" << DFS_VERSION_MAJOR << "." << DFS_VERSION_MINOR
-              << "\nClient"
-              << std::endl;
     try {
         Client* client = new Client();
         SocketFileReader* reader = new SocketFileReader(client);
@@ -28,7 +23,7 @@ int main(int argc, char const *argv[]) {
 
         delete reader;
         delete client;
-    } catch (std::exception e) {
+    } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
     }
     return 0; 

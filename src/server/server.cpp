@@ -1,6 +1,4 @@
 #include <iostream> 
-#include <cstdlib> 
-#include <string> 
 #include <exception>
 
 #include "Server.h"
@@ -11,10 +9,6 @@
 #define FILE_NAME   ("server-file")
 
 int main(int argc, char const* argv[]) {
-    std::cout << argv[0]
-              << " v" << DFS_VERSION_MAJOR << "." << DFS_VERSION_MINOR
-              << "\nServer"
-              << std::endl;
     try {
         Server* server = new Server();
         SocketFileSender* sender = new SocketFileSender(server);
@@ -28,7 +22,7 @@ int main(int argc, char const* argv[]) {
 
         delete sender;
         delete server;
-    } catch (std::exception e) {
+    } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
     }
     return 0;
