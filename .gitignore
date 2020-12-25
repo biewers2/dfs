@@ -1,3 +1,13 @@
+# Build output
 bin
+
+# CMake files
 cmake-build-debug
+CMakeFiles
+Testing
+
+# IDE files
 .idea
+
+# Libraries
+lib
