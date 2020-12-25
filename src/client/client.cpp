@@ -3,7 +3,7 @@
 #include <exception>
 
 #include "Client.h"
-#include "../sockio/SocketFileReader.h"
+#include "sockio/SocketFileReader.h"
 
 #define PORT        (8080)
 #define ADDRESS     ("127.0.0.1")

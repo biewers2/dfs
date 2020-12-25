@@ -6,7 +6,6 @@
 
 std::vector<std::string>
 DirectoryScanner::parseStringPath(const std::string& stringPath) {
-
 }
 
 
@@ -21,7 +20,7 @@ DirectoryScanner::changeSingleDirectory(const std::string& dirName) {
 
 
 DirectoryScanner::DirectoryScanner(const std::string& dirStringPath) {
-    this->path = new std::vector<std::string>>();
+    this->path = new std::vector<std::string>();
     for (std::string& fileName : this->parseStringPath(dirStringPath)) {
         this->changeSingleDirectory(fileName);
     }

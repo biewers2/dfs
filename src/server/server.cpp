@@ -2,7 +2,7 @@
 #include <exception>
 
 #include "Server.h"
-#include "../sockio/SocketFileSender.h"
+#include "sockio/SocketFileSender.h"
 
 #define OPTIONS     (1)
 #define PORT        (8080)
