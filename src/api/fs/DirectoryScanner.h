@@ -4,20 +4,24 @@
 #include <vector>
 #include <string>
 
+#include "Path.h"
+
+
+class DirectoryScannerTest;
 
 class DirectoryScanner {
 private:
-    std::vector<std::string>* path;
-    std::vector<std::string> parseStringPath(const std::string& stringPath);
-    void changeSingleDirectory(const std::string& dirName);
+    Path m_path;
 
 public:
-    DirectoryScanner(const std::string& dirStringPath);
-    ~DirectoryScanner();
-    void changeDirectory(const std::string& stringPath);
+    DirectoryScanner();
+
+    void setPath(Path path);
     std::vector<std::string> getListOfFiles();
     std::vector<std::string> getListOfDirectories();
+    std::vector<std::string> getListOfAllContents();
 
+    friend DirectoryScannerTest;
 };
 
 

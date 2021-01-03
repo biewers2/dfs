@@ -1,40 +1,31 @@
 #include <vector>
 #include <string>
 
+#include "Path.h"
 #include "DirectoryScanner.h"
 
 
+DirectoryScanner::DirectoryScanner() : m_path(Path("")) {}
+
+
+void DirectoryScanner::setPath(Path path) {
+    this->m_path = path;
+}
+
+
 std::vector<std::string>
-DirectoryScanner::parseStringPath(const std::string& stringPath) {
+DirectoryScanner::getListOfFiles() {
+    return std::vector<std::string>();
 }
 
 
-void
-DirectoryScanner::changeSingleDirectory(const std::string& dirName) {
-    if (dirName == ".." && this->path->size() > 0) {
-        this->path->pop_back();
-    } else {
-        this->path->push_back(dirName);
-    }
+std::vector<std::string>
+DirectoryScanner::getListOfDirectories() {
+    return std::vector<std::string>();
 }
 
 
-DirectoryScanner::DirectoryScanner(const std::string& dirStringPath) {
-    this->path = new std::vector<std::string>();
-    for (std::string& fileName : this->parseStringPath(dirStringPath)) {
-        this->changeSingleDirectory(fileName);
-    }
-}
-
-
-DirectoryScanner::~DirectoryScanner() {
-    delete this->path;
-}
-
-
-void
-DirectoryScanner::changeDirectory(const std::string& stringPath) {
-    for (std::string& fileName : this->parseStringPath(stringPath)) {
-        this->changeSingleDirectory(fileName);
-    }
+std::vector<std::string>
+DirectoryScanner::getListOfAllContents() {
+    return std::vector<std::string>();
 }
