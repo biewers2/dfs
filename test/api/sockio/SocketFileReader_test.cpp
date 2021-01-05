@@ -26,10 +26,10 @@ void testSocketsWith(Server* server, L1 serverCode, Client* client, L2 clientCod
 TEST_F(SocketFileIOTest, test_simple) {
     testSocketsWith(
             m_server, [=]() -> void {
-                ASSERT_TRUE(true);
+                m_reader->readDataIntoFile(Path("mock-fs/unit/server-mock-file"));
             },
             m_client, [=]() -> void {
-
+                m_sender->sendDataFromFile(Path("mock-fs/unit/mock-file"));
             }
     );
 }

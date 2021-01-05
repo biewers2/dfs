@@ -12,8 +12,8 @@ SocketFileSender::SocketFileSender(Socket* socket) {
 }
 
 
-void SocketFileSender::sendDataFromFile(const char* fileName) {
-    std::ifstream dataStream(fileName);
+void SocketFileSender::sendDataFromFile(Path path) {
+    std::ifstream dataStream(path.asString());
     std::streamsize fileSize = getFileSizeFromStream(dataStream);
     this->socket->send(&fileSize, FTP_HEADER_SIZE);
 

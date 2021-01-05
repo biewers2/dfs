@@ -13,8 +13,8 @@ SocketFileReader::SocketFileReader(Socket* socket) {
 }
 
 
-void SocketFileReader::readDataIntoFile(const char* fileName) {
-    std::ofstream dataStream(fileName);
+void SocketFileReader::readDataIntoFile(Path path) {
+    std::ofstream dataStream(path.asString());
     std::streamsize fileSize;
     this->socket->read((char*)&fileSize, FTP_HEADER_SIZE);
 
