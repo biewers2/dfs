@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 
 #include "exceptions/fs.h"
 #include "PathTest.h"

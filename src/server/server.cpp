@@ -1,12 +1,13 @@
 #include <iostream> 
 #include <exception>
 
-#include "Server.h"
+#include "sockio/Server.h"
 #include "sockio/SocketFileSender.h"
 
 #define OPTIONS     (1)
 #define PORT        (8080)
 #define FILE_NAME   ("server-file")
+
 
 int main(int argc, char const* argv[]) {
     try {
@@ -21,6 +22,7 @@ int main(int argc, char const* argv[]) {
         }
 
         delete sender;
+        server->close();
         delete server;
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;

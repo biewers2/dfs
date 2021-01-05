@@ -2,8 +2,9 @@
 #define __DFS_TESTING_DIRECTORY_SCANNER_TEST_H__
 
 #include <string>
+
 #include <gtest/gtest.h>
-#include <fs/DirectoryScanner.h>
+
 #include "fs/DirectoryScanner.h"
 
 

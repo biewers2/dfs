@@ -2,9 +2,9 @@
 #include <vector>
 #include <string>
 
-#include "exceptions/fs.h"
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 
+#include "exceptions/fs.h"
 #include "DirectoryScannerTest.h"
 
 

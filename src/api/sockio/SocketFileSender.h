@@ -5,6 +5,7 @@
 
 #include "api/Socket.h"
 
+
 class SocketFileSender {
 private:
     Socket* socket;
@@ -14,5 +15,6 @@ public:
     void sendDataFromFile(const char* fileName);
 
 };
+
 
 #endif // __DFS_SOCKIO_SOCKET_STRING_SENDER_H__

@@ -9,7 +9,7 @@
 #include "Path.h"
 
 
-class DirectoryScannerTest;
+class SocketFileReaderTest;
 
 class DirectoryScanner {
 private:
@@ -25,7 +25,7 @@ public:
     std::vector<std::string> getListOfDirectories(bool ignoreDots = true);
     std::vector<std::string> getListOfAllContents(bool ignoreDots = true);
 
-    friend DirectoryScannerTest;
+    friend SocketFileReaderTest;
 };
 
 

@@ -1,7 +1,5 @@
 #include <string>
 
-#include <gtest/gtest.h>
-
 #include "fs/Path.h"
 #include "PathTest.h"
 

@@ -3,11 +3,13 @@
 
 #include <exception>
 
+
 class SocketInitException : public std::exception {
     virtual const char* what() const throw() {
         return "Socket failed to initialize.";
     }
 };
+
 
 class SocketOptionException : public std::exception {
     virtual const char* what() const throw() {
@@ -15,11 +17,13 @@ class SocketOptionException : public std::exception {
     }
 };
 
+
 class SocketBindException : public std::exception {
     virtual const char* what() const throw() {
         return "Socket failed to bind port.";
     }
 };
+
 
 class SocketListenException : public std::exception {
     virtual const char* what() const throw() {
@@ -27,11 +31,13 @@ class SocketListenException : public std::exception {
     }
 };
 
+
 class SocketAcceptException : public std::exception {
     virtual const char* what() const throw() {
         return "Socket failed to accept incoming connection.";
     }
 };
+
 
 class SocketAddressException : public std::exception {
     virtual const char* what() const throw() {
@@ -39,10 +45,12 @@ class SocketAddressException : public std::exception {
     }
 };
 
+
 class SocketConnectionException : public std::exception {
     virtual const char* what() const throw() {
         return "Socket failed to connect to server.";
     }
 };
+
 
 #endif // __DFS_EXCEPTIONS_SOCKET_H__

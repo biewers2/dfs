@@ -2,7 +2,7 @@
 #include <string> 
 #include <exception>
 
-#include "Client.h"
+#include "sockio/Client.h"
 #include "sockio/SocketFileReader.h"
 
 #define PORT        (8080)
@@ -10,7 +10,7 @@
 #define FILE_NAME   ("client-file")
 
 
-int main(int argc, char const *argv[]) {
+int main(int argc, char const* argv[]) {
     try {
         Client* client = new Client();
         SocketFileReader* reader = new SocketFileReader(client);
@@ -22,6 +22,7 @@ int main(int argc, char const *argv[]) {
         std::cout << "File read from server!" << std::endl;
 
         delete reader;
+        client->close();
         delete client;
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
