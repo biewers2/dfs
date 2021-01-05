@@ -22,3 +22,9 @@ std::vector<std::string>
 PathTest::parseStringPath(const std::string& stringPath) {
     return m_path->parseStringPath(stringPath);
 }
+
+
+void
+PathTest::changeSingleDirectory(const std::string& stringFile) {
+    m_path->changeSingleDirectory(stringFile);
+}

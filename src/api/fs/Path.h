@@ -4,10 +4,12 @@
 #include <vector>
 #include <string>
 
+
 class PathTest;
 
 class Path {
 private:
+    void changeSingleDirectory(const std::string& stringFile);
     std::vector<std::string> parseStringPath(const std::string& stringPath);
 
     std::vector<std::string> m_components;
@@ -18,7 +20,8 @@ public:
 
     bool isAbsolute();
     std::vector<std::string> getComponents();
-    void changeDirectory(const std::string& pathString);
+    void changeDirectory(const std::string& stringPath);
+    std::string asString();
 
     friend PathTest;
 };

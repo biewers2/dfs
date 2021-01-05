@@ -14,6 +14,7 @@ protected:
     void TearDown() override;
 
     std::vector<std::string> parseStringPath(const std::string& stringPath);
+    void changeSingleDirectory(const std::string& stringFile);
 
     Path* m_path;
 };

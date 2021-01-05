@@ -4,30 +4,25 @@
 #include "exceptions/fs.h"
 #include "Path.h"
 
-#include <iostream>
 
 Path::Path(const char* stringPath) {
-    m_components = this->parseStringPath(stringPath);
-    if (!m_components.empty() && m_components.front() == "/") {
-        m_absolute = true;
-        m_components.erase(m_components.begin());
-    }
+    m_absolute = false;
+    this->changeDirectory(stringPath);
 }
 
-#include <iostream>
 
-void parseSingleComponent(std::vector<std::string>& pathList, std::string& component) {
-    if (component == ".") {
+void
+Path::changeSingleDirectory(const std::string& stringFile) {
+    if (stringFile == ".") {
         return;
-    } else if (component == "..") {
-        bool atRoot = pathList.size() == 1 && pathList.at(0) == "/";
-        if (!pathList.empty() && !atRoot) {
-            pathList.pop_back();
+    } else if (stringFile == "..") {
+        if (!m_components.empty()) {
+            m_components.pop_back();
         }
-    } else if (component.empty()) {
-        throw FilePathParseException();
+    } else if (stringFile.empty()) {
+        throw FilePathException();
     } else {
-        pathList.push_back(component);
+        m_components.push_back(stringFile);
     }
 }
 
@@ -40,15 +35,20 @@ Path::parseStringPath(const std::string& stringPath) {
         pathList.insert(pathList.begin(), "/");
         subPath = subPath.substr(1, subPath.length());
     }
+
     while (!subPath.empty()) {
         std::string::size_type delimiterPosition{ subPath.find('/') };
         std::string component{ subPath };
         if (delimiterPosition == std::string::npos) { // no delimiter found.
-            parseSingleComponent(pathList, component);
+            pathList.push_back(component);
             break;
         }
+
         component = subPath.substr(0, delimiterPosition);
-        parseSingleComponent(pathList, component);
+        if (component.empty()) {
+            throw FilePathParseException();
+        }
+        pathList.push_back(component);
         subPath = subPath.substr(delimiterPosition + 1, subPath.length());
     }
     return pathList;
@@ -68,6 +68,26 @@ Path::isAbsolute() {
 
 
 void
-Path::changeDirectory(const std::string &pathString) {
-    // todo
+Path::changeDirectory(const std::string &stringPath) {
+    std::vector<std::string> components = parseStringPath(stringPath);
+    if (!components.empty() && components.front() == "/") {
+        m_absolute = true;
+        components.erase(components.begin());
+    }
+    for (const std::string& component : components) {
+        changeSingleDirectory(component);
+    }
+}
+
+
+std::string
+Path::asString() {
+    std::string stringPath{ "" };
+    if (m_absolute) {
+        stringPath += '/';
+    }
+    for (const std::string& component : m_components) {
+        stringPath += component + '/';
+    }
+    return stringPath;
 }
