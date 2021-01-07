@@ -15,7 +15,7 @@ int main(int argc, char const* argv[]) {
 
         try {
             sender->sendDataFromFile(Path("client-file"));
-        } catch(const FStreamException& e) {
+        } catch (const std::exception& e) {
             std::cout << e.what() << std::endl;
         }
 

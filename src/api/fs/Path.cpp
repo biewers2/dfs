@@ -86,8 +86,11 @@ Path::asString() {
     if (m_absolute) {
         stringPath += '/';
     }
-    for (const std::string& component : m_components) {
-        stringPath += component + '/';
+    for (int i{ 0 }; i != m_components.size(); ++i) {
+        stringPath += m_components.at(i);
+        if (i != m_components.size() - 1) {
+            stringPath += '/';
+        }
     }
     return stringPath;
 }

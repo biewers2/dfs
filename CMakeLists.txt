@@ -9,10 +9,9 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 file(GLOB_RECURSE API_UNIT_TEST_FILES
-        ${PROJECT_SOURCE_DIR}/test/api/*.cpp)
+        ${PROJECT_SOURCE_DIR}/test/*.cpp)
 file(GLOB_RECURSE API_SOURCE_FILES
-        ${PROJECT_SOURCE_DIR}/src/api/*.cpp
-        ${API_UNIT_TEST_FILES})
+        ${PROJECT_SOURCE_DIR}/src/api/*.cpp)
 file(GLOB SERVER_SOURCE_FILES
         ${PROJECT_SOURCE_DIR}/src/server/*.cpp
         ${API_SOURCE_FILES})
@@ -30,21 +29,16 @@ add_executable(client
         ${API_SOURCE_FILES})
 add_executable(api_unit_tests
         ${API_SOURCE_FILES}
-        ${PROJECT_SOURCE_DIR}/test/main_test.cpp)
+        ${API_UNIT_TEST_FILES})
 
 target_include_directories(server
         PUBLIC "include"
-        PRIVATE "src/api"
-        PRIVATE ${PROJECT_SOURCE_DIR})
+        PRIVATE "src/api")
 target_include_directories(client
         PUBLIC "include"
-        PRIVATE "src/api"
-        PRIVATE ${PROJECT_SOURCE_DIR})
+        PRIVATE "src/api")
 target_include_directories(api_unit_tests
         PUBLIC "include"
-        PRIVATE "src/api"
-        PRIVATE ${PROJECT_SOURCE_DIR})
+        PRIVATE "src/api")
 
-target_link_libraries(server ${CONAN_LIBS})
-target_link_libraries(client ${CONAN_LIBS})
 target_link_libraries(api_unit_tests ${CONAN_LIBS})

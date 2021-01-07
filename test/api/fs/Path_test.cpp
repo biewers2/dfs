@@ -180,3 +180,27 @@ TEST_F(PathTest, test_constructor) {
     ASSERT_STREQ(pathList.at(1).c_str(), "four");
     ASSERT_TRUE(path.isAbsolute());
 }
+
+
+TEST_F(PathTest, test_asString_absolute) {
+    ASSERT_NO_THROW(m_path->changeDirectory("/"));
+    ASSERT_STREQ(m_path->asString().c_str(), "/");
+
+    ASSERT_NO_THROW(m_path->changeDirectory("/one"));
+    ASSERT_STREQ(m_path->asString().c_str(), "/one");
+
+    ASSERT_NO_THROW(m_path->changeDirectory("/two/three"));
+    ASSERT_STREQ(m_path->asString().c_str(), "/one/two/three");
+}
+
+
+TEST_F(PathTest, test_asString_relative) {
+    ASSERT_NO_THROW(m_path->changeDirectory(""));
+    ASSERT_STREQ(m_path->asString().c_str(), "");
+
+    ASSERT_NO_THROW(m_path->changeDirectory("one"));
+    ASSERT_STREQ(m_path->asString().c_str(), "one");
+
+    ASSERT_NO_THROW(m_path->changeDirectory("two/three"));
+    ASSERT_STREQ(m_path->asString().c_str(), "one/two/three");
+}

@@ -20,10 +20,10 @@ public:
 };
 
 
-class FStreamException: public std::exception {
+class FileOpenException : public std::exception {
 public:
     virtual const char* what() const throw() {
-        return "Error occurred within an fstream instance.";
+        return "Error occurred when opening file.";
     }
 };
 

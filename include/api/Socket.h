@@ -1,6 +1,10 @@
 #ifndef __DFS_API_SOCKET__
 #define __DFS_API_SOCKET__
 
+#include <cstddef>
+
+#include <sys/socket.h>
+
 
 class Socket {
 public:

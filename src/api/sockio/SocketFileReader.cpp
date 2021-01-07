@@ -15,9 +15,9 @@ SocketFileReader::SocketFileReader(Socket* socket) {
 
 
 void SocketFileReader::readDataIntoFile(Path path) {
-    std::ofstream dataStream(path.asString());
-    if (!dataStream.is_open()) {
-        throw FStreamException();
+    std::ofstream outputStream(path.asString().c_str());
+    if (!outputStream.is_open()) {
+        throw FileOpenException();
     }
 
     std::streamsize fileSize;
@@ -28,14 +28,14 @@ void SocketFileReader::readDataIntoFile(Path path) {
     while (bytesToRead > 0) {
         if (bytesToRead >= BUFFER_SIZE) {
             this->socket->read(buffer, BUFFER_SIZE);
-            dataStream.write(buffer, BUFFER_SIZE);
+            outputStream.write(buffer, BUFFER_SIZE);
         } else {
             this->socket->read(buffer, bytesToRead);
-            dataStream.write(buffer, bytesToRead);
+            outputStream.write(buffer, bytesToRead);
         }
         bytesToRead -= BUFFER_SIZE;
     }
     delete[] buffer;
 
-    dataStream.close();
+    outputStream.close();
 }

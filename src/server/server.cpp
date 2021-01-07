@@ -1,6 +1,5 @@
 #include <iostream> 
 #include <exception>
-#include <exceptions/fs.h>
 
 #include "sockio/Server.h"
 #include "sockio/SocketFileReader.h"
@@ -13,13 +12,11 @@ int main(int argc, char const* argv[]) {
         server->initSocket(1, 8080);
 
         while (server->listenAndAccept()) {
-            std::cout << "Sending file..." << std::endl;
             try {
                 reader->readDataIntoFile(Path("server-file"));
-            } catch(const FStreamException& e) {
+            } catch(const std::exception& e) {
                 std::cout << e.what() << std::endl;
             }
-            std::cout << "File sent!" << std::endl;
         }
 
         delete reader;
