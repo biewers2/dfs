@@ -1,6 +1,7 @@
 #include <fstream>
 #include <string>
 
+#include "exceptions/fs.h"
 #include "api/ftp.h"
 #include "api/Socket.h"
 #include "SocketFileReader.h"
@@ -15,6 +16,10 @@ SocketFileReader::SocketFileReader(Socket* socket) {
 
 void SocketFileReader::readDataIntoFile(Path path) {
     std::ofstream dataStream(path.asString());
+    if (!dataStream.is_open()) {
+        throw FStreamException();
+    }
+
     std::streamsize fileSize;
     this->socket->read((char*)&fileSize, FTP_HEADER_SIZE);
 

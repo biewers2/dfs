@@ -1,27 +1,28 @@
 #include <iostream> 
 #include <exception>
+#include <exceptions/fs.h>
 
 #include "sockio/Server.h"
-#include "sockio/SocketFileSender.h"
-
-#define OPTIONS     (1)
-#define PORT        (8080)
-#define FILE_NAME   ("server-file")
+#include "sockio/SocketFileReader.h"
 
 
 int main(int argc, char const* argv[]) {
     try {
         Server* server = new Server();
-        SocketFileSender* sender = new SocketFileSender(server);
-        server->initSocket(OPTIONS, PORT);
+        SocketFileReader* reader = new SocketFileReader(server);
+        server->initSocket(1, 8080);
 
         while (server->listenAndAccept()) {
             std::cout << "Sending file..." << std::endl;
-            sender->sendDataFromFile(FILE_NAME);
+            try {
+                reader->readDataIntoFile(Path("server-file"));
+            } catch(const FStreamException& e) {
+                std::cout << e.what() << std::endl;
+            }
             std::cout << "File sent!" << std::endl;
         }
 
-        delete sender;
+        delete reader;
         server->close();
         delete server;
     } catch (std::exception& e) {

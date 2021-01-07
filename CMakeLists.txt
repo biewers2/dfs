@@ -29,7 +29,8 @@ add_executable(client
         ${CLIENT_SOURCE_FILES}
         ${API_SOURCE_FILES})
 add_executable(api_unit_tests
-        ${API_SOURCE_FILES})
+        ${API_SOURCE_FILES}
+        ${PROJECT_SOURCE_DIR}/test/main_test.cpp)
 
 target_include_directories(server
         PUBLIC "include"
@@ -44,5 +45,6 @@ target_include_directories(api_unit_tests
         PRIVATE "src/api"
         PRIVATE ${PROJECT_SOURCE_DIR})
 
-target_link_libraries(api_unit_tests
-        ${CONAN_LIBS})
+target_link_libraries(server ${CONAN_LIBS})
+target_link_libraries(client ${CONAN_LIBS})
+target_link_libraries(api_unit_tests ${CONAN_LIBS})

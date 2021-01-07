@@ -1,6 +1,7 @@
 #include <fstream>
 #include <string>
 
+#include "exceptions/fs.h"
 #include "api/ftp.h"
 #include "SocketFileSender.h"
 
@@ -14,6 +15,9 @@ SocketFileSender::SocketFileSender(Socket* socket) {
 
 void SocketFileSender::sendDataFromFile(Path path) {
     std::ifstream dataStream(path.asString());
+    if (!dataStream.is_open()) {
+        throw FStreamException();
+    }
     std::streamsize fileSize = getFileSizeFromStream(dataStream);
     this->socket->send(&fileSize, FTP_HEADER_SIZE);
 
