@@ -8,15 +8,15 @@
 #include "DirectoryScannerTest.h"
 
 
-TEST_F(DirectoryScannerTest, test_setPath) {
-    ASSERT_NO_THROW(m_scanner->setPath(Path("mock-fs")));
-    ASSERT_THROW(m_scanner->setPath(Path("non-existent")), FilePathException);
-    ASSERT_NO_THROW(m_scanner->setPath(Path("mock-fs/unit/test/path")));
+TEST_F(DirectoryScannerTest, test_setDirectory) {
+    ASSERT_NO_THROW(m_scanner->setDirectory("mock-fs"));
+    ASSERT_THROW(m_scanner->setDirectory("non-existent"), FilePathException);
+    ASSERT_NO_THROW(m_scanner->setDirectory("mock-fs/unit/test/path"));
 }
 
 
 TEST_F(DirectoryScannerTest, test_getListOfFiles) {
-    m_scanner->setPath(Path("mock-fs/unit"));
+    m_scanner->setDirectory("mock-fs/unit");
     std::vector<std::string> list = m_scanner->getListOfFiles();
 
     EXPECT_EQ(list.size(), 1);
@@ -25,7 +25,7 @@ TEST_F(DirectoryScannerTest, test_getListOfFiles) {
 
 
 TEST_F(DirectoryScannerTest, test_getListOfDirectories) {
-    m_scanner->setPath(Path("mock-fs/unit"));
+    m_scanner->setDirectory("mock-fs/unit");
     std::vector<std::string> list = m_scanner->getListOfDirectories();
 
     EXPECT_EQ(list.size(), 2);
@@ -35,7 +35,7 @@ TEST_F(DirectoryScannerTest, test_getListOfDirectories) {
 
 
 TEST_F(DirectoryScannerTest, test_getListOfDirectories_include_dots) {
-    m_scanner->setPath(Path("mock-fs/unit"));
+    m_scanner->setDirectory("mock-fs/unit");
     std::vector<std::string> list = m_scanner->getListOfDirectories(false);
 
     EXPECT_EQ(list.size(), 4);
@@ -47,7 +47,7 @@ TEST_F(DirectoryScannerTest, test_getListOfDirectories_include_dots) {
 
 
 TEST_F(DirectoryScannerTest, test_getListOfAllContents) {
-    m_scanner->setPath(Path("mock-fs/unit"));
+    m_scanner->setDirectory("mock-fs/unit");
     std::vector<std::string> list = m_scanner->getListOfAllContents();
 
     EXPECT_EQ(list.size(), 3);
@@ -58,7 +58,7 @@ TEST_F(DirectoryScannerTest, test_getListOfAllContents) {
 
 
 TEST_F(DirectoryScannerTest, test_getListOfAllContents_include_dots) {
-    m_scanner->setPath(Path("mock-fs/unit"));
+    m_scanner->setDirectory("mock-fs/unit");
     std::vector<std::string> list = m_scanner->getListOfAllContents(false);
 
     EXPECT_EQ(list.size(), 5);

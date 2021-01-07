@@ -14,8 +14,8 @@ SocketFileReader::SocketFileReader(Socket* socket) {
 }
 
 
-void SocketFileReader::readDataIntoFile(Path path) {
-    std::ofstream outputStream(path.asString().c_str());
+void SocketFileReader::readDataIntoFile(const char* fileName) {
+    std::ofstream outputStream(fileName);
     if (!outputStream.is_open()) {
         throw FileOpenException();
     }

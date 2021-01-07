@@ -15,13 +15,13 @@ SocketFileSender::SocketFileSender(Socket* socket) {
 }
 
 
-void SocketFileSender::sendDataFromFile(Path path) {
-    std::ifstream inputStream(path.asString().c_str());
+void SocketFileSender::sendDataFromFile(const char* fileName) {
+    std::ifstream inputStream(fileName);
     if (!inputStream.is_open()) {
         throw FileOpenException();
     }
 
-    std::streamsize fileSize{ getSizeOfStream(inputStream) };
+    std::streamsize fileSize{ (std::streamsize)getSizeOfFile(fileName) };
     this->socket->send(&fileSize, FTP_HEADER_SIZE);
 
     std::streamsize bytesToRead{ fileSize };

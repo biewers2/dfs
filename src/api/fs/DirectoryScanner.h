@@ -6,26 +6,23 @@
 
 #include <dirent.h>
 
-#include "Path.h"
 
-
-class SocketFileReaderTest;
+class DirectoryScannerTest;
 
 class DirectoryScanner {
 private:
-    Path m_path;
     DIR* m_directory;
 
 public:
     DirectoryScanner();
     ~DirectoryScanner();
 
-    void setPath(Path path);
+    void setDirectory(const char* dirName);
     std::vector<std::string> getListOfFiles();
     std::vector<std::string> getListOfDirectories(bool ignoreDots = true);
     std::vector<std::string> getListOfAllContents(bool ignoreDots = true);
 
-    friend SocketFileReaderTest;
+    friend DirectoryScannerTest;
 };
 
 

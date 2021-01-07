@@ -8,7 +8,7 @@
 SocketFileHashReader::SocketFileHashReader(Socket* socket) {}
 
 
-std::tuple<char*, hash_t, struct timespec>
+std::tuple<char*, hash_t, timestamp_t>
 SocketFileHashReader::readHash() {
-    return std::tuple<char*, hash_t, struct timespec>();
+    return std::tuple<char*, hash_t, timestamp_t>();
 }

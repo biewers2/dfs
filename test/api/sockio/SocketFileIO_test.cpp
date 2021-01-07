@@ -59,7 +59,7 @@ TEST_F(SocketFileIOTest, test_single_file) {
     testSocketsWith(
             m_server, [=]() -> void {
                 try {
-                    ASSERT_NO_THROW(m_reader->readDataIntoFile(Path("server-mock-file")));
+                    ASSERT_NO_THROW(m_reader->readDataIntoFile("server-mock-file"));
                     ASSERT_TRUE(fileExists("server-mock-file"));
                     ASSERT_TRUE(filesAreEqual("mock-fs/unit/mock-file", "server-mock-file"));
                     ASSERT_EQ(std::remove("server-mock-file"), 0);
@@ -69,7 +69,7 @@ TEST_F(SocketFileIOTest, test_single_file) {
             },
             m_client, [=]() -> void {
                 try {
-                    ASSERT_NO_THROW(m_sender->sendDataFromFile(Path("mock-fs/unit/mock-file")));
+                    ASSERT_NO_THROW(m_sender->sendDataFromFile("mock-fs/unit/mock-file"));
                 } catch(std::exception& e) {
                     std::cerr << e.what() << std::endl;
                 }
@@ -82,9 +82,9 @@ TEST_F(SocketFileIOTest, test_multiple_files) {
     testSocketsWith(
             m_server, [=]() -> void {
                 try {
-                    ASSERT_NO_THROW(m_reader->readDataIntoFile(Path("server-mock-file1")));
-                    ASSERT_NO_THROW(m_reader->readDataIntoFile(Path("server-mock-file2")));
-                    ASSERT_NO_THROW(m_reader->readDataIntoFile(Path("server-mock-file3")));
+                    ASSERT_NO_THROW(m_reader->readDataIntoFile("server-mock-file1"));
+                    ASSERT_NO_THROW(m_reader->readDataIntoFile("server-mock-file2"));
+                    ASSERT_NO_THROW(m_reader->readDataIntoFile("server-mock-file3"));
                     ASSERT_TRUE(fileExists("server-mock-file1"));
                     ASSERT_TRUE(fileExists("server-mock-file2"));
                     ASSERT_TRUE(fileExists("server-mock-file3"));
@@ -100,9 +100,9 @@ TEST_F(SocketFileIOTest, test_multiple_files) {
             },
             m_client, [=]() -> void {
                 try {
-                    ASSERT_NO_THROW(m_sender->sendDataFromFile(Path("mock-fs/unit/mock-file")));
-                    ASSERT_NO_THROW(m_sender->sendDataFromFile(Path("mock-fs/unit/mock-file")));
-                    ASSERT_NO_THROW(m_sender->sendDataFromFile(Path("mock-fs/unit/mock-file")));
+                    ASSERT_NO_THROW(m_sender->sendDataFromFile("mock-fs/unit/mock-file"));
+                    ASSERT_NO_THROW(m_sender->sendDataFromFile("mock-fs/unit/mock-file"));
+                    ASSERT_NO_THROW(m_sender->sendDataFromFile("mock-fs/unit/mock-file"));
                 } catch(std::exception& e) {
                     std::cerr << e.what() << std::endl;
                 }
@@ -115,7 +115,7 @@ TEST_F(SocketFileIOTest, test_single_file_bad_format) {
     testSocketsWith(
             m_server, [=]() -> void {},
             m_client, [=]() -> void {
-                ASSERT_THROW(m_sender->sendDataFromFile(Path("file-does-not-exist")), FileOpenException);
+                ASSERT_THROW(m_sender->sendDataFromFile("file-does-not-exist"), FileOpenException);
             }
     );
 }

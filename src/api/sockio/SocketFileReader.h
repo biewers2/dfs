@@ -3,7 +3,6 @@
 
 #include <string>
 
-#include "fs/Path.h"
 #include "api/Socket.h"
 
 
@@ -15,7 +14,7 @@ private:
 
 public:
     SocketFileReader(Socket* socket);
-    void readDataIntoFile(Path path);
+    void readDataIntoFile(const char* fileName);
 
     friend SocketFileReaderTest;
 };

@@ -14,7 +14,7 @@ int main(int argc, char const* argv[]) {
         client->connect();
 
         try {
-            sender->sendDataFromFile(Path("client-file"));
+            sender->sendDataFromFile("client-file");
         } catch (const std::exception& e) {
             std::cout << e.what() << std::endl;
         }

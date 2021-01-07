@@ -13,7 +13,7 @@ int main(int argc, char const* argv[]) {
 
         while (server->listenAndAccept()) {
             try {
-                reader->readDataIntoFile(Path("server-file"));
+                reader->readDataIntoFile("server-file");
             } catch(const std::exception& e) {
                 std::cout << e.what() << std::endl;
             }

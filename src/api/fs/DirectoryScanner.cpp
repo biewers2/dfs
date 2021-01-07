@@ -5,7 +5,6 @@
 #include <cstring>
 
 #include "exceptions/fs.h"
-#include "Path.h"
 #include "DirectoryScanner.h"
 
 
@@ -15,7 +14,7 @@ isDotDirectory(const char* dir) {
 }
 
 
-DirectoryScanner::DirectoryScanner() : m_path{ Path("") }, m_directory{ nullptr } {}
+DirectoryScanner::DirectoryScanner() : m_directory{ nullptr } {}
 
 
 DirectoryScanner::~DirectoryScanner() {
@@ -26,8 +25,8 @@ DirectoryScanner::~DirectoryScanner() {
 }
 
 
-void DirectoryScanner::setPath(Path path) {
-    DIR* directory{ opendir(path.asString().c_str()) };
+void DirectoryScanner::setDirectory(const char* dirName) {
+    DIR* directory{ opendir(dirName) };
     if (directory) {
         if (m_directory) {
             closedir(m_directory);
@@ -37,7 +36,6 @@ void DirectoryScanner::setPath(Path path) {
     } else {
         throw FilePathException();
     }
-    m_path = path;
 }
 
 

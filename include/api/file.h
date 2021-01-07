@@ -1,18 +1,22 @@
 #ifndef __DFS_FILE_H__
 #define __DFS_FILE_H__
 
-#include <fstream>
+#include <cstdio>
 
 
 typedef size_t hash_t;
+typedef struct timespec timestamp_t;
 
 enum FileStatus {
     GOOD, NEWER, OLDER
 };
 
-hash_t hashContents(const std::ifstream& fileToHash);
+hash_t hashContents(const char* fileName);
 
-std::streamsize getSizeOfStream(std::ifstream& stream);
+timestamp_t getLastModified(const char* fileName);
+
+size_t getSizeOfFile(FILE* fd);
+size_t getSizeOfFile(const char* fileName);
 
 
 #endif // __DFS_FILE_H__

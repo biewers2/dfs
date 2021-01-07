@@ -3,7 +3,6 @@
 
 #include <string>
 
-#include "fs/Path.h"
 #include "api/Socket.h"
 
 
@@ -13,7 +12,7 @@ private:
 
 public:
     SocketFileSender(Socket* socket);
-    void sendDataFromFile(Path path);
+    void sendDataFromFile(const char* fileName);
 
 };
 

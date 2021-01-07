@@ -4,14 +4,6 @@
 #include <ios>
 
 
-class FilePathParseException : public std::exception {
-public:
-    virtual const char* what() const throw() {
-        return "Invalid file path was parsed.";
-    }
-};
-
-
 class FilePathException : public std::exception {
 public:
     virtual const char* what() const throw() {

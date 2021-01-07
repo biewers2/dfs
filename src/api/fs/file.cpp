@@ -1,25 +1,28 @@
-#include <fstream>
-#include <limits>
+#include <cstdio>
+
+#include <sys/stat.h>
 
 #include "api/file.h"
 
 
 hash_t
-hashContents(const std::ifstream& fileToHash) {
+hashContents(const char* fileName) {
     return 0;
 }
 
 
-struct timespec getLastModified(const std::ifstream& ) {
-    return (struct timespec){};
+timestamp_t getLastModified(const char* fileName) {
+    return timestamp_t();
 }
 
 
-std::streamsize
-getSizeOfStream(std::ifstream& stream) {
-    stream.ignore(std::numeric_limits<std::streamsize>::max());
-    std::streamsize size{ stream.gcount() };
-    stream.clear();
-    stream.seekg(0, std::ios_base::beg);
-    return size;
+size_t
+getSizeOfFile(FILE* fd) {
+    return 0;
+}
+
+
+size_t
+getSizeOfFile(const char* fileName) {
+    return 0;
 }
