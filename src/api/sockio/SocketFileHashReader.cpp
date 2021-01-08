@@ -1,4 +1,5 @@
 #include <tuple>
+#include <string>
 
 #include "api/file.h"
 #include "api/Socket.h"
@@ -8,7 +9,7 @@
 SocketFileHashReader::SocketFileHashReader(Socket* socket) {}
 
 
-std::tuple<char*, hash_t, timestamp_t>
+std::tuple<std::string, hash_t, timestamp_t>
 SocketFileHashReader::readHash() {
-    return std::tuple<char*, hash_t, timestamp_t>();
+    return std::tuple<std::string, hash_t, timestamp_t>();
 }

@@ -14,7 +14,7 @@ private:
 
 public:
     SocketFileReader(Socket* socket);
-    void readDataIntoFile(const char* fileName);
+    void readDataIntoFile(const std::string& fileName);
 
     friend SocketFileReaderTest;
 };

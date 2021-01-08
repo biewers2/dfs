@@ -17,7 +17,7 @@ public:
     DirectoryScanner();
     ~DirectoryScanner();
 
-    void setDirectory(const char* dirName);
+    void setDirectory(const std::string& dirName);
     std::vector<std::string> getListOfFiles();
     std::vector<std::string> getListOfDirectories(bool ignoreDots = true);
     std::vector<std::string> getListOfAllContents(bool ignoreDots = true);

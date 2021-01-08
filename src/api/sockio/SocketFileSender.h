@@ -12,7 +12,7 @@ private:
 
 public:
     SocketFileSender(Socket* socket);
-    void sendDataFromFile(const char* fileName);
+    void sendDataFromFile(const std::string& fileName);
 
 };
 

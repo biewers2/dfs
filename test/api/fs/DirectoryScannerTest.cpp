@@ -1,3 +1,5 @@
+#include <string>
+
 #include "fs/DirectoryScanner.h"
 #include "DirectoryScannerTest.h"
 

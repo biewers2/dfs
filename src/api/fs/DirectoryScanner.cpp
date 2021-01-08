@@ -9,8 +9,8 @@
 
 
 bool
-isDotDirectory(const char* dir) {
-    return strcmp(dir, "..") == 0 || strcmp(dir, ".") == 0;
+isDotDirectory(const std::string& dir) {
+    return strcmp(dir.c_str(), "..") == 0 || strcmp(dir.c_str(), ".") == 0;
 }
 
 
@@ -25,8 +25,8 @@ DirectoryScanner::~DirectoryScanner() {
 }
 
 
-void DirectoryScanner::setDirectory(const char* dirName) {
-    DIR* directory{ opendir(dirName) };
+void DirectoryScanner::setDirectory(const std::string& dirName) {
+    DIR* directory{ opendir(dirName.c_str()) };
     if (directory) {
         if (m_directory) {
             closedir(m_directory);

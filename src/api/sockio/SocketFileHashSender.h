@@ -1,6 +1,8 @@
 #ifndef __DFS_SOCKIO_SOCKET_FILE_HASH_SENDER_H__
 #define __DFS_SOCKIO_SOCKET_FILE_HASH_SENDER_H__
 
+#include <string>
+
 #include "api/Socket.h"
 
 
@@ -10,7 +12,7 @@ private:
 
 public:
     SocketFileHashSender(Socket* socket);
-    void sendHash(const char* fileName);
+    void sendHash(const std::string& fileName);
 };
 
 

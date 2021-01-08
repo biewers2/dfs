@@ -2,6 +2,7 @@
 #define __DFS_SOCKIO_SOCKET_FILE_STATUS_READER_H__
 
 #include <utility>
+#include <string>
 
 #include "api/file.h"
 #include "api/Socket.h"
@@ -13,7 +14,7 @@ private:
 
 public:
     SocketFileStatusReader(Socket* socket);
-    std::pair<char*, FileStatus> readStatus();
+    std::pair<std::string, FileStatus> readStatus();
 };
 
 

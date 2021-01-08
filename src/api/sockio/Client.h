@@ -15,7 +15,7 @@ private:
     struct sockaddr_in m_serverAddress;
     
 public:
-    void initSocket(const char* address, const int port);
+    void initSocket(const std::string& address, const int port);
     void connect();
     void send(const void* data, const size_t dataSize) override;
     ssize_t read(char* buffer, const size_t bufferSize) override;

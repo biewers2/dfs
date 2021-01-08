@@ -1,4 +1,5 @@
 #include <utility>
+#include <string>
 
 #include "api/file.h"
 #include "api/Socket.h"
@@ -8,7 +9,7 @@
 SocketFileStatusReader::SocketFileStatusReader(Socket* socket) {}
 
 
-std::pair<char*, FileStatus>
+std::pair<std::string, FileStatus>
 SocketFileStatusReader::readStatus() {
-    return std::pair<char*, FileStatus>();
+    return std::pair<std::string, FileStatus>();
 }

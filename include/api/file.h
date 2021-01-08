@@ -1,6 +1,7 @@
 #ifndef __DFS_FILE_H__
 #define __DFS_FILE_H__
 
+#include <string>
 #include <cstdio>
 
 
@@ -11,12 +12,12 @@ enum FileStatus {
     GOOD, NEWER, OLDER
 };
 
-hash_t hashContents(const char* fileName);
+hash_t hashContents(const std::string& fileName);
 
-timestamp_t getLastModified(const char* fileName);
+timestamp_t getLastModified(const std::string& fileName);
 
 size_t getSizeOfFile(FILE* fd);
-size_t getSizeOfFile(const char* fileName);
+size_t getSizeOfFile(const std::string& fileName);
 
 
 #endif // __DFS_FILE_H__

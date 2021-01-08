@@ -15,7 +15,7 @@ SocketFileSender::SocketFileSender(Socket* socket) {
 }
 
 
-void SocketFileSender::sendDataFromFile(const char* fileName) {
+void SocketFileSender::sendDataFromFile(const std::string& fileName) {
     std::ifstream inputStream(fileName);
     if (!inputStream.is_open()) {
         throw FileOpenException();

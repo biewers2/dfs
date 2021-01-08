@@ -2,6 +2,7 @@
 #define __DFS_SOCKIO_SOCKET_FILE_HASH_READER_H__
 
 #include <tuple>
+#include <string>
 
 #include "api/file.h"
 #include "api/Socket.h"
@@ -13,7 +14,7 @@ private:
 
 public:
     SocketFileHashReader(Socket* socket);
-    std::tuple<char*, hash_t, timestamp_t> readHash();
+    std::tuple<std::string, hash_t, timestamp_t> readHash();
 };
 
 

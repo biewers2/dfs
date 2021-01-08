@@ -11,12 +11,12 @@
 #include "SocketFileIOTest.h"
 
 
-bool fileExists(const char* fileName) {
-    return (access(fileName, F_OK) != -1);
+bool fileExists(const std::string& fileName) {
+    return (access(fileName.c_str(), F_OK) != -1);
 }
 
 
-bool filesAreEqual(const char* fileName1, const char* fileName2) {
+bool filesAreEqual(const std::string& fileName1, const std::string& fileName2) {
     std::ifstream fileStream1(fileName1, std::ifstream::binary | std::ifstream::ate);
     std::ifstream fileStream2(fileName2, std::ifstream::binary | std::ifstream::ate);
 
@@ -60,9 +60,9 @@ TEST_F(SocketFileIOTest, test_single_file) {
             m_server, [=]() -> void {
                 try {
                     ASSERT_NO_THROW(m_reader->readDataIntoFile("server-mock-file"));
-                    ASSERT_TRUE(fileExists("server-mock-file"));
-                    ASSERT_TRUE(filesAreEqual("mock-fs/unit/mock-file", "server-mock-file"));
-                    ASSERT_EQ(std::remove("server-mock-file"), 0);
+                    EXPECT_TRUE(fileExists("server-mock-file"));
+                    EXPECT_TRUE(filesAreEqual("mock-fs/unit/mock-file", "server-mock-file"));
+                    EXPECT_EQ(std::remove("server-mock-file"), 0);
                 } catch(std::exception& e) {
                     std::cerr << e.what() << std::endl;
                 }
@@ -85,15 +85,15 @@ TEST_F(SocketFileIOTest, test_multiple_files) {
                     ASSERT_NO_THROW(m_reader->readDataIntoFile("server-mock-file1"));
                     ASSERT_NO_THROW(m_reader->readDataIntoFile("server-mock-file2"));
                     ASSERT_NO_THROW(m_reader->readDataIntoFile("server-mock-file3"));
-                    ASSERT_TRUE(fileExists("server-mock-file1"));
-                    ASSERT_TRUE(fileExists("server-mock-file2"));
-                    ASSERT_TRUE(fileExists("server-mock-file3"));
-                    ASSERT_TRUE(filesAreEqual("mock-fs/unit/mock-file", "server-mock-file1"));
-                    ASSERT_TRUE(filesAreEqual("mock-fs/unit/mock-file", "server-mock-file2"));
-                    ASSERT_TRUE(filesAreEqual("mock-fs/unit/mock-file", "server-mock-file3"));
-                    ASSERT_EQ(std::remove("server-mock-file1"), 0);
-                    ASSERT_EQ(std::remove("server-mock-file2"), 0);
-                    ASSERT_EQ(std::remove("server-mock-file3"), 0);
+                    EXPECT_TRUE(fileExists("server-mock-file1"));
+                    EXPECT_TRUE(fileExists("server-mock-file2"));
+                    EXPECT_TRUE(fileExists("server-mock-file3"));
+                    EXPECT_TRUE(filesAreEqual("mock-fs/unit/mock-file", "server-mock-file1"));
+                    EXPECT_TRUE(filesAreEqual("mock-fs/unit/mock-file", "server-mock-file2"));
+                    EXPECT_TRUE(filesAreEqual("mock-fs/unit/mock-file", "server-mock-file3"));
+                    EXPECT_EQ(std::remove("server-mock-file1"), 0);
+                    EXPECT_EQ(std::remove("server-mock-file2"), 0);
+                    EXPECT_EQ(std::remove("server-mock-file3"), 0);
                 } catch(std::exception& e) {
                     std::cerr << e.what() << std::endl;
                 }

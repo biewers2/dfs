@@ -1,6 +1,8 @@
 #ifndef __DFS_SOCKIO_SOCKET_FILE_STATUS_SENDER_H__
 #define __DFS_SOCKIO_SOCKET_FILE_STATUS_SENDER_H__
 
+#include <string>
+
 #include "api/file.h"
 #include "api/Socket.h"
 
@@ -11,7 +13,7 @@ private:
 
 public:
     SocketFileStatusSender(Socket* socket);
-    void sendStatus(const char* fileName, hash_t& value);
+    void sendStatus(const std::string& fileName, hash_t& value);
 };
 
 
