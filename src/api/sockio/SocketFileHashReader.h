@@ -14,7 +14,7 @@ private:
 
 public:
     SocketFileHashReader(Socket* socket);
-    std::tuple<std::string, hash_t, timestamp_t> readHash();
+    std::tuple<std::string, hashString_t, timestamp_t> readHash();
 };
 
 

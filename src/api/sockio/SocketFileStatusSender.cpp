@@ -10,6 +10,6 @@ SocketFileStatusSender::SocketFileStatusSender(Socket* socket) {}
 
 
 void
-SocketFileStatusSender::sendStatus(const std::string& fileName, hash_t& value) {
+SocketFileStatusSender::sendStatus(const std::string& fileName, FileStatus status) {
 
 }

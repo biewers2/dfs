@@ -3,19 +3,41 @@
 
 #include <sys/stat.h>
 
+#include <cryptopp/sha.h>
+#include <cryptopp/crc.h>
+#include <cryptopp/hex.h>
+#include <cryptopp/files.h>
+#include <cryptopp/channels.h>
+
 #include "api/file.h"
 
 
-hash_t
+hashString_t
 hashContents(const std::string& fileName) {
-    return 0;
+    using namespace CryptoPP;
+
+    std::string crcOutput, shaOutput;
+    CRC32 crcHash;
+    SHA256 shaHash;
+
+    HashFilter crcFilter(crcHash, new HexEncoder(new StringSink(crcOutput)));
+    HashFilter shaFilter(shaHash, new HexEncoder(new StringSink(shaOutput)));
+
+    ChannelSwitch channelSwitch;
+    channelSwitch.AddDefaultRoute(crcFilter);
+    channelSwitch.AddDefaultRoute(shaFilter);
+
+    FileSource(fileName.c_str(), true /*pumpAll*/, new Redirector(channelSwitch));
+
+    return shaOutput;
 }
 
 
 timestamp_t getLastModified(const std::string& fileName) {
-    return timestamp_t();
+    struct stat fileStat;
+    stat(fileName.c_str(), &fileStat);
+    return fileStat.st_mtim;
 }
-
 
 size_t
 getSizeOfFile(FILE* fd) {

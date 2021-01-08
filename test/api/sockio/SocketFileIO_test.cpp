@@ -11,12 +11,14 @@
 #include "SocketFileIOTest.h"
 
 
-bool fileExists(const std::string& fileName) {
+static bool
+fileExists(const std::string& fileName) {
     return (access(fileName.c_str(), F_OK) != -1);
 }
 
 
-bool filesAreEqual(const std::string& fileName1, const std::string& fileName2) {
+static bool
+filesAreEqual(const std::string& fileName1, const std::string& fileName2) {
     std::ifstream fileStream1(fileName1, std::ifstream::binary | std::ifstream::ate);
     std::ifstream fileStream2(fileName2, std::ifstream::binary | std::ifstream::ate);
 
@@ -37,7 +39,8 @@ bool filesAreEqual(const std::string& fileName1, const std::string& fileName2) {
 
 
 template<typename L1, typename L2>
-void testSocketsWith(Server* server, L1 serverCode, Client* client, L2 clientCode) {
+static void
+testSocketsWith(Server* server, L1 serverCode, Client* client, L2 clientCode) {
     std::thread serverThread([=]() {
         server->initSocket(1, 8080);
         server->listenAndAccept();

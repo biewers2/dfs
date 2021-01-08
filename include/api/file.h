@@ -5,14 +5,14 @@
 #include <cstdio>
 
 
-typedef size_t hash_t;
 typedef struct timespec timestamp_t;
+typedef std::string hashString_t;
 
 enum FileStatus {
     GOOD, NEWER, OLDER
 };
 
-hash_t hashContents(const std::string& fileName);
+std::string hashContents(const std::string& fileName);
 
 timestamp_t getLastModified(const std::string& fileName);
 

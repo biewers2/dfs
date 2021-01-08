@@ -13,7 +13,7 @@ private:
 
 public:
     SocketFileStatusSender(Socket* socket);
-    void sendStatus(const std::string& fileName, hash_t& value);
+    void sendStatus(const std::string& fileName, FileStatus status);
 };
 
 

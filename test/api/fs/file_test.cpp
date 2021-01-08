@@ -8,62 +8,77 @@
 #include "api/file.h"
 
 
-void
-createRandomFile(const std::string& fileName) {
+const char* FILE_NAME{ "FileAPI_randomFile" };
+
+
+static void
+createRandomFile(const std::string& fileName, size_t sizeInBytes) {
     std::ofstream outputStream(fileName);
-    outputStream << rand();
+    EXPECT_TRUE(outputStream.is_open());
+    for (int i{ 0 }; i < sizeInBytes; ++i) {
+        outputStream << (char) rand();
+    }
     outputStream.close();
 }
 
 
-void
+static void
 deleteFile(const std::string& fileName) {
     EXPECT_EQ(std::remove(fileName.c_str()), 0);
 }
 
 
-TEST(FileAPI, test_hashContents_single) {
-    const char* FILE_NAME{ "FileAPI_randomFile1" };
-    createRandomFile(FILE_NAME);
-    EXPECT_GT(hashContents(FILE_NAME), 0);
+static void
+touchFile(const std::string& fileName) {
+    // Update timestamp of file.
+    std::ofstream touch(fileName);
+    touch.close();
+}
+
+
+TEST(FileAPI, test_hashContents_single_large) {
+    createRandomFile(FILE_NAME, 10000);
+    ASSERT_NO_THROW(hashContents(FILE_NAME));
     deleteFile(FILE_NAME);
 }
 
 
-TEST(FileAPI, test_hashContents_massive) {
-    const std::string FILE_NAME_BASE{ "FileAPI_randomFile" };
-    std::unordered_set<hash_t>* hashes = new std::unordered_set<hash_t>();
-    std::unordered_set<std::string>* fileNames = new std::unordered_set<std::string>();
+TEST(FileAPI, test_hashContents_many_small) {
+    std::unordered_set<hashString_t>* hashes = new std::unordered_set<hashString_t>();
 
     for (int i{ 0 }; i < 1000; ++i) {
-        const std::string FILE_NAME{ FILE_NAME_BASE + std::to_string(i) };
-        createRandomFile(FILE_NAME);
-
-        hash_t value{ hashContents(FILE_NAME) };
+        const std::string FILE_NAME_i{ FILE_NAME + std::to_string(i) };
+        createRandomFile(FILE_NAME_i, 10);
+        hashString_t value{ hashContents(FILE_NAME_i) };
         EXPECT_EQ(hashes->count(value), 0);
-
-        fileNames->insert(FILE_NAME);
         hashes->insert(value);
-    }
-    for (const std::string& fileName : *fileNames) {
-        deleteFile(fileName);
+        deleteFile(FILE_NAME);
     }
 
     delete hashes;
-    delete fileNames;
 }
 
 
 TEST(FileAPI, test_getLastModified) {
-    FAIL();
+    createRandomFile(FILE_NAME, 10);
+    timestamp_t timeBefore{ getLastModified(FILE_NAME) };
+    touchFile(FILE_NAME);
+    timestamp_t timeAfter{ getLastModified(FILE_NAME) };
+    EXPECT_GT(timeAfter.tv_nsec, timeBefore.tv_nsec);
+    deleteFile(FILE_NAME);
 }
 
 
 TEST(FileAPI, test_getSizeOfFile_descriptor) {
-    FAIL();
+    createRandomFile(FILE_NAME, 10);
+    FILE* fd{ fopen(FILE_NAME, "r") };
+    EXPECT_EQ(getSizeOfFile(fd), 10);
+    deleteFile(FILE_NAME);
 }
 
 
 TEST(FileAPI, test_getSizeOfFile_file_name) {
-    FAIL();
+    createRandomFile(FILE_NAME, 10);
+    EXPECT_EQ(getSizeOfFile(FILE_NAME), 10);
+    deleteFile(FILE_NAME);
 }

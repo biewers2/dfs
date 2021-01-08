@@ -41,4 +41,6 @@ target_include_directories(api_unit_tests
         PUBLIC "include"
         PRIVATE "src/api")
 
+target_link_libraries(server ${CONAN_LIBS})
+target_link_libraries(client ${CONAN_LIBS})
 target_link_libraries(api_unit_tests ${CONAN_LIBS})
