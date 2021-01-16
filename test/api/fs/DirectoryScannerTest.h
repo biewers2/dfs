@@ -20,8 +20,6 @@ protected:
     void SetUp() override;
     void TearDown() override;
 
-    bool listContainsString(const std::vector<std::string>& list, const std::string& str);
-
     DirectoryScanner* m_scanner;
 };
 

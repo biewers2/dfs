@@ -1,22 +1,30 @@
 #ifndef __DFS_EXCEPTIONS_FS_H__
 #define __DFS_EXCEPTIONS_FS_H__
 
-#include <ios>
+#include <exception>
 
 
-class FilePathException : public std::exception {
+class FileException : public std::exception {
 public:
-    virtual const char* what() const throw() {
-        return "File path was either invalid or didn't exist.";
-    }
+    virtual const char* what() const throw();
 };
 
 
-class FileOpenException : public std::exception {
+class FilePathException : public FileException {
 public:
-    virtual const char* what() const throw() {
-        return "Error occurred when opening file.";
-    }
+    virtual const char* what() const throw();
+};
+
+
+class FileOpenException : public FileException {
+public:
+    virtual const char* what() const throw();
+};
+
+
+class FileDoesNotExistException : public FileException {
+public:
+    virtual const char* what() const throw();
 };
 
 

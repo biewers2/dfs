@@ -3,53 +3,43 @@
 
 #include <exception>
 
-
-class SocketInitException : public std::exception {
-    virtual const char* what() const throw() {
-        return "Socket failed to initialize.";
-    }
+class SocketException : public std::exception {
+    virtual const char* what() const throw();
 };
 
 
-class SocketOptionException : public std::exception {
-    virtual const char* what() const throw() {
-        return "Socket options failed to set.";
-    }
+class SocketInitException : public SocketException {
+    virtual const char* what() const throw();
 };
 
 
-class SocketBindException : public std::exception {
-    virtual const char* what() const throw() {
-        return "Socket failed to bind port.";
-    }
+class SocketOptionException : public SocketException {
+    virtual const char* what() const throw();
 };
 
 
-class SocketListenException : public std::exception {
-    virtual const char* what() const throw() {
-        return "Socket failed to listen.";
-    }
+class SocketBindException : public SocketException {
+    virtual const char* what() const throw();
 };
 
 
-class SocketAcceptException : public std::exception {
-    virtual const char* what() const throw() {
-        return "Socket failed to accept incoming connection.";
-    }
+class SocketListenException : public SocketException {
+    virtual const char* what() const throw();
 };
 
 
-class SocketAddressException : public std::exception {
-    virtual const char* what() const throw() {
-        return "Socket address was invalid or not supported.";
-    }
+class SocketAcceptException : public SocketException {
+    virtual const char* what() const throw();
 };
 
 
-class SocketConnectionException : public std::exception {
-    virtual const char* what() const throw() {
-        return "Socket failed to connect to server.";
-    }
+class SocketAddressException : public SocketException {
+    virtual const char* what() const throw();
+};
+
+
+class SocketConnectionException : public SocketException {
+    virtual const char* what() const throw();
 };
 
 

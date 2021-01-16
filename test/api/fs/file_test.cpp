@@ -1,39 +1,13 @@
-#include <fstream>
 #include <string>
 #include <unordered_set>
-#include <cstdlib>
 
 #include <gtest/gtest.h>
 
-#include "api/file.h"
+#include "test-util.h"
+#include "api/fs/file.h"
 
 
 const char* FILE_NAME{ "FileAPI_randomFile" };
-
-
-static void
-createRandomFile(const std::string& fileName, size_t sizeInBytes) {
-    std::ofstream outputStream(fileName);
-    EXPECT_TRUE(outputStream.is_open());
-    for (int i{ 0 }; i < sizeInBytes; ++i) {
-        outputStream << (char) rand();
-    }
-    outputStream.close();
-}
-
-
-static void
-deleteFile(const std::string& fileName) {
-    EXPECT_EQ(std::remove(fileName.c_str()), 0);
-}
-
-
-static void
-touchFile(const std::string& fileName) {
-    // Update timestamp of file.
-    std::ofstream touch(fileName);
-    touch.close();
-}
 
 
 TEST(FileAPI, test_hashContents_single_large) {
@@ -52,7 +26,7 @@ TEST(FileAPI, test_hashContents_many_small) {
         hashString_t value{ hashContents(FILE_NAME_i) };
         EXPECT_EQ(hashes->count(value), 0);
         hashes->insert(value);
-        deleteFile(FILE_NAME);
+        deleteFile(FILE_NAME_i);
     }
 
     delete hashes;
@@ -64,7 +38,7 @@ TEST(FileAPI, test_getLastModified) {
     timestamp_t timeBefore{ getLastModified(FILE_NAME) };
     touchFile(FILE_NAME);
     timestamp_t timeAfter{ getLastModified(FILE_NAME) };
-    EXPECT_GT(timeAfter.tv_nsec, timeBefore.tv_nsec);
+    EXPECT_GE(timeAfter.tv_nsec, timeBefore.tv_nsec);
     deleteFile(FILE_NAME);
 }
 

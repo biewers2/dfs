@@ -2,6 +2,7 @@
 #include <cstdio>
 
 #include <sys/stat.h>
+#include <unistd.h>
 
 #include <cryptopp/sha.h>
 #include <cryptopp/crc.h>
@@ -9,12 +10,17 @@
 #include <cryptopp/files.h>
 #include <cryptopp/channels.h>
 
-#include "api/file.h"
+#include "exceptions/fs.h"
+#include "api/fs/file.h"
 
 
 hashString_t
 hashContents(const std::string& fileName) {
     using namespace CryptoPP;
+
+    if (!fileExists(fileName)) {
+        throw FileDoesNotExistException();
+    }
 
     std::string crcOutput, shaOutput;
     CRC32 crcHash;
@@ -57,4 +63,10 @@ getSizeOfFile(const std::string& fileName) {
     size_t size{ getSizeOfFile(fd) };
     fclose(fd);
     return size;
+}
+
+
+bool
+fileExists(const std::string& fileName) {
+    return (access(fileName.c_str(), F_OK) != -1);
 }

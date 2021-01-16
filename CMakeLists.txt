@@ -13,10 +13,10 @@ file(GLOB_RECURSE API_UNIT_TEST_FILES
 file(GLOB_RECURSE API_SOURCE_FILES
         ${PROJECT_SOURCE_DIR}/src/api/*.cpp)
 file(GLOB SERVER_SOURCE_FILES
-        ${PROJECT_SOURCE_DIR}/src/server/*.cpp
+        ${PROJECT_SOURCE_DIR}/src/server.cpp
         ${API_SOURCE_FILES})
 file(GLOB CLIENT_SOURCE_FILES
-        ${PROJECT_SOURCE_DIR}/src/client/*.cpp
+        ${PROJECT_SOURCE_DIR}/src/client.cpp
         ${API_SOURCE_FILES})
 
 file(COPY ${PROJECT_SOURCE_DIR}/test/mock-fs DESTINATION ${CMAKE_BINARY_DIR}/bin)
@@ -39,7 +39,8 @@ target_include_directories(client
         PRIVATE "src/api")
 target_include_directories(api_unit_tests
         PUBLIC "include"
-        PRIVATE "src/api")
+        PRIVATE "src/api"
+        PRIVATE "test/include")
 
 target_link_libraries(server ${CONAN_LIBS})
 target_link_libraries(client ${CONAN_LIBS})
