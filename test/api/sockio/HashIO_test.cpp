@@ -2,7 +2,6 @@
 
 #include "test-util.h"
 #include "exceptions/fs.h"
-#include "protocols/htp.h"
 #include "HashIOTest.h"
 
 

@@ -7,7 +7,7 @@
 #include "api/fs/file.h"
 
 
-const char* FILE_NAME{ "FileAPI_randomFile" };
+static const char* FILE_NAME{ "FileAPI_randomFile" };
 
 
 TEST(FileAPI, test_hashContents_single_large) {
@@ -20,7 +20,7 @@ TEST(FileAPI, test_hashContents_single_large) {
 TEST(FileAPI, test_hashContents_many_small) {
     std::unordered_set<hashString_t>* hashes = new std::unordered_set<hashString_t>();
 
-    for (int i{ 0 }; i < 1000; ++i) {
+    for (int i{ 0 }; i < 10000; ++i) {
         const std::string FILE_NAME_i{ FILE_NAME + std::to_string(i) };
         createRandomFile(FILE_NAME_i, 10);
         hashString_t value{ hashContents(FILE_NAME_i) };
@@ -38,7 +38,7 @@ TEST(FileAPI, test_getLastModified) {
     timestamp_t timeBefore{ getLastModified(FILE_NAME) };
     touchFile(FILE_NAME);
     timestamp_t timeAfter{ getLastModified(FILE_NAME) };
-    EXPECT_GE(timeAfter.tv_nsec, timeBefore.tv_nsec);
+    EXPECT_GE(timeAfter, timeBefore);
     deleteFile(FILE_NAME);
 }
 

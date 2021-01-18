@@ -6,11 +6,11 @@
 
 void
 DirectoryScannerTest::SetUp() {
-    this->m_scanner = new DirectoryScanner();
+    m_scanner = new DirectoryScanner();
 }
 
 
 void
 DirectoryScannerTest::TearDown() {
-    delete this->m_scanner;
+    delete m_scanner;
 }
