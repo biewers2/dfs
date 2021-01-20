@@ -13,7 +13,9 @@ protected:
     void SetUp() override;
     void TearDown() override;
 
-    FileTimeIndexer* m_indexer;
+    void setNoFile(bool noFile);
+
+    __FTIndexer* m_indexer;
 };
 
 

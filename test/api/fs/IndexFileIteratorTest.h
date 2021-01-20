@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include "fs/IndexFileIterator.h"
+#include "ft/IndexFileIterator.h"
 
 
 class IndexFileIteratorTest : public ::testing::Test {

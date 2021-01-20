@@ -2,27 +2,27 @@
 #define __DFS_FS_INDEX_FILE_ITERATOR_H__
 
 #include <fstream>
-#include "api/fs/timestamp.h"
+#include "api/ft/ft-types.h"
+#include "api/ft/timestamp.h"
 
-
-typedef std::pair<std::string, timestamp_t> fileTimestampPair_t;
 
 class IndexFileIteratorTest;
 
 class IndexFileIterator {
 private:
-
     void prepareNext();
 
-    std::ifstream m_stream;
-    fileTimestampPair_t* m_nextItem{ nullptr };
+    std::ifstream m_inputStream;
+    ftPair_t* m_nextItem{ nullptr };
 
 public:
     IndexFileIterator(const std::string& fileName);
     ~IndexFileIterator();
 
+    void close();
+
     bool hasNext();
-    fileTimestampPair_t next();
+    ftPair_t next();
 
     friend IndexFileIteratorTest;
 };

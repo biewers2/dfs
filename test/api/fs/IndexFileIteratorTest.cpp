@@ -1,4 +1,4 @@
-#include "fs/IndexFileIterator.h"
+#include "ft/IndexFileIterator.h"
 #include "IndexFileIteratorTest.h"
 
 
