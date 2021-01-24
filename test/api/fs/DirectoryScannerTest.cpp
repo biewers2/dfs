@@ -1,5 +1,6 @@
 #include <string>
 
+#include "test-util.h"
 #include "fs/DirectoryScanner.h"
 #include "DirectoryScannerTest.h"
 

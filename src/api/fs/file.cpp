@@ -40,7 +40,7 @@ hashContents(const std::string& fileName) {
 
 
 timestamp_t getLastModified(const std::string& fileName) {
-    struct stat fileStat;
+    struct stat fileStat{ 0 };
     stat(fileName.c_str(), &fileStat);
     return fileStat.st_atim;
 }

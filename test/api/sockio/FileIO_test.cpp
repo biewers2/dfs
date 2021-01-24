@@ -11,11 +11,11 @@ TEST_F(FileIOTest, test_single_file) {
         [=]() -> void {
             ASSERT_NO_THROW(m_receiver->recvDataIntoFile("server-mock-file"));
             EXPECT_TRUE(fileExists("server-mock-file"));
-            EXPECT_TRUE(filesAreEqual("mock-fs/unit/mock-file", "server-mock-file"));
+            EXPECT_TRUE(filesAreEqual("resources/DirectoryScannerTest/mock-file", "server-mock-file"));
             EXPECT_EQ(std::remove("server-mock-file"), 0);
         },
         [=]() -> void {
-            ASSERT_NO_THROW(m_sender->sendDataFromFile("mock-fs/unit/mock-file"));
+            ASSERT_NO_THROW(m_sender->sendDataFromFile("resources/DirectoryScannerTest/mock-file"));
         }
     );
 }
@@ -29,13 +29,13 @@ TEST_F(FileIOTest, test_multiple_files) {
             for (int i{ 0 }; i < NUM_FILES; ++i) {
                 ASSERT_NO_THROW(m_receiver->recvDataIntoFile("server-mock-file"));
                 EXPECT_TRUE(fileExists("server-mock-file"));
-                EXPECT_TRUE(filesAreEqual("mock-fs/unit/mock-file", "server-mock-file"));
+                EXPECT_TRUE(filesAreEqual("resources/DirectoryScannerTest/mock-file", "server-mock-file"));
                 EXPECT_EQ(std::remove("server-mock-file"), 0);
             }
         },
         [=]() -> void {
             for (int i{ 0 }; i < NUM_FILES; ++i) {
-                ASSERT_NO_THROW(m_sender->sendDataFromFile("mock-fs/unit/mock-file"));
+                ASSERT_NO_THROW(m_sender->sendDataFromFile("resources/DirectoryScannerTest/mock-file"));
             }
         }
     );

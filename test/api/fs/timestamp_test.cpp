@@ -3,7 +3,7 @@
 
 #include "test-util.h"
 #include "api/fs/file.h"
-#include "api/ft/timestamp.h"
+#include "api/fs/timestamp.h"
 
 
 static const char* FILE_NAME{ "TimestampAPI_randomFile" };

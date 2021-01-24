@@ -14,7 +14,7 @@ TEST_F(HashIOTest, test_single_file) {
             EXPECT_STREQ(hashContents(fileName).c_str(), hashValue.c_str());
         },
         [=]() -> void {
-            ASSERT_NO_THROW(m_sender->sendHash("mock-fs/unit/mock-file"));
+            ASSERT_NO_THROW(m_sender->sendHash("resources/DirectoryScannerTest/mock-file"));
         }
     );
 }
@@ -34,7 +34,7 @@ TEST_F(HashIOTest, test_multiple_files) {
         },
         [=]() -> void {
             for (int i{ 0 }; i < NUM_FILES; ++i) {
-                ASSERT_NO_THROW(m_sender->sendHash("mock-fs/unit/mock-file"));
+                ASSERT_NO_THROW(m_sender->sendHash("resources/DirectoryScannerTest/mock-file"));
             }
         }
     );

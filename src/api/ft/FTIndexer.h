@@ -1,44 +1,32 @@
-#ifndef __DFS_FS_FILE_TIME_INDEXER_H__
-#define __DFS_FS_FILE_TIME_INDEXER_H__
+#ifndef __DFS_UTIL_FILE_TIMESTAMP_INDEXER_H__
+#define __DFS_UTIL_FILE_TIMESTAMP_INDEXER_H__
 
-#include <vector>
 #include <string>
+#include <unordered_map>
+#include "api/fs/timestamp.h"
+#include "FTIndex.h"
 
-#include "FTQueue.h"
-#include "IndexFileIterator.h" /* ftPair_t */
-#include "api/fs/file.h"
+
+typedef std::unordered_map<std::string, timestamp_t>::iterator ftIterator_t;
 
 
 class FTIndexerTest;
 
 class FTIndexer {
 private:
-    void placeInCache(const ftPair_t& pair);
-
-    timestamp_t retrieveFromIndexFile(const std::string& fileNameKey);
-    void eraseFromIndexFile(const std::string& fileNameKey);
-    void eraseFromIndexFile(std::vector<std::string> fileNameKey);
-
-    void writeCacheToIndex();
-    void writeCacheEntryToIndex(const ftPair_t& entry);
-
-    int m_cacheSize;
-    FTQueue* m_cacheQueue;
-    std::string m_indexFileName;
+    FTIndex* m_indexObject;
 
 public:
-    __FTIndexer(const std::string& indexFileName, int cacheSize);
-    ~__FTIndexer();
+    FTIndexer(FTIndex* index);
 
-    void index(const std::string& fileName);
-    void index(const std::string& fileName, const timestamp_t& timestamp);
-
+    timestamp_t at(const std::string& fileName);
     bool contains(const std::string& fileName);
-    timestamp_t get(const std::string& fileName);
+
+    void insert(const std::string& fileName, const timestamp_t& timestamp);
     void erase(const std::string& fileName);
 
-    friend FileTimeIndexerTest;
+    friend FTIndexerTest;
 };
 
 
-#endif // __DFS_FS_FILE_TIME_INDEXER_H__
+#endif // __DFS_UTIL_FILE_TIMESTAMP_INDEXER_H__
