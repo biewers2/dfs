@@ -1,29 +1,20 @@
 #include <exception>
-#include <string>
 
 #include <gtest/gtest.h>
 
-#include "test-util.h"
 #include "api/fs/file.h"
 #include "FTIndexReaderTest.h"
 
-/*
- * read empty file
- * read single
- * read multiple
- * read invalid (read 3 lines)
- */
-
 
 TEST_F(FTIndexReaderTest, test_read_empty) {
-    m_indexReader->setInputFile(READER_FILE_NAME_BASE + "empty");
+    m_indexReader->setInputFile(buildResourcesPath("empty"));
     ASSERT_NO_THROW(m_indexReader->read());
     ASSERT_TRUE(indexRef().empty());
 }
 
 
 TEST_F(FTIndexReaderTest, test_read_single) {
-    m_indexReader->setInputFile(READER_FILE_NAME_BASE + "single");
+    m_indexReader->setInputFile(buildResourcesPath("single"));
     ASSERT_NO_THROW(m_indexReader->read());
     ASSERT_EQ(indexRef().size(), 1);
     ASSERT_TRUE(indexRef().count("file0") > 0);
@@ -32,7 +23,7 @@ TEST_F(FTIndexReaderTest, test_read_single) {
 
 
 TEST_F(FTIndexReaderTest, test_read_multiple) {
-    m_indexReader->setInputFile(READER_FILE_NAME_BASE + "multiple");
+    m_indexReader->setInputFile(buildResourcesPath("multiple"));
     ASSERT_NO_THROW(m_indexReader->read());
     ASSERT_EQ(indexRef().size(), 5);
     ASSERT_TRUE(indexRef().count("file0") > 0);
@@ -49,7 +40,7 @@ TEST_F(FTIndexReaderTest, test_read_multiple) {
 
 
 TEST_F(FTIndexReaderTest, test_read_invalid) {
-    m_indexReader->setInputFile(READER_FILE_NAME_BASE + "invalid");
+    m_indexReader->setInputFile(buildResourcesPath("invalid"));
     ASSERT_NO_THROW(m_indexReader->read());
     ASSERT_EQ(indexRef().size(), 3);
     ASSERT_TRUE(indexRef().count("file0") > 0);

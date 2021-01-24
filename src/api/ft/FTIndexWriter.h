@@ -8,15 +8,14 @@
 class FTIndexWriter {
 private:
     FTIndex* m_indexObject;
-    std::ofstream m_outputStream;
+    std::string m_outputFileName;
 
 public:
     FTIndexWriter(FTIndex* index);
     FTIndexWriter(const std::string& fileName, FTIndex* index);
-    ~FTIndexWriter();
 
     void setIndex(FTIndex* index);
-    void setInputFile(const std::string& fileName);
+    void setOutputFile(const std::string& fileName);
 
     void write();
 };

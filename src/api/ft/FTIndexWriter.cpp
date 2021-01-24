@@ -12,12 +12,7 @@ FTIndexWriter::FTIndexWriter(FTIndex* index) {
 
 FTIndexWriter::FTIndexWriter(const std::string& fileName, FTIndex* index) {
     setIndex(index);
-    setInputFile(fileName);
-}
-
-
-FTIndexWriter::~FTIndexWriter() {
-    m_outputStream.close();
+    setOutputFile(fileName);
 }
 
 
@@ -28,20 +23,19 @@ FTIndexWriter::setIndex(FTIndex* index) {
 
 
 void
-FTIndexWriter::setInputFile(const std::string& fileName) {
-    if (m_outputStream.is_open()) {
-        m_outputStream.close();
-    }
-    m_outputStream = std::ofstream(fileName);
-    if (!m_outputStream.is_open()) {
-        throw FileOpenException();
-    }
+FTIndexWriter::setOutputFile(const std::string& fileName) {
+    m_outputFileName = fileName;
 }
 
 
 void
 FTIndexWriter::write() {
-    for (const auto& item : *(m_indexObject->index)) {
-        m_outputStream << item.first << ' ' << item.second << '\n';
+    std::ofstream outputStream(m_outputFileName);
+    if (!outputStream.is_open()) {
+        throw FileOpenException();
     }
+    for (const auto& item : *(m_indexObject->index)) {
+        outputStream << item.first << ' ' << item.second << '\n';
+    }
+    outputStream.close();
 }
