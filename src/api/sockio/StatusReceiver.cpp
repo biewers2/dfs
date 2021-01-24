@@ -13,10 +13,10 @@ StatusReceiver::StatusReceiver(Socket* socket) {
 stp::FileStatus
 StatusReceiver::recvStatus(std::string& fileNameHolder) {
     STPBuilder builder;
-    stp::header_t header;
+    stp::header_t header{};
     this->m_socket->recv(&header, stp::HEADER_SIZE);
 
-    stp::content_t content;
+    stp::content_t content{};
     builder.buildEmpty(&header, &content);
     this->m_socket->recv(content.fileName, header.fileNameSize);
     this->m_socket->recv(&content.status, sizeof(stp::FileStatus));

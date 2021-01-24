@@ -16,8 +16,8 @@ HashSender::HashSender(Socket* socket) {
 void
 HashSender::sendHash(const std::string& fileName) {
     HTPBuilder builder;
-    htp::header_t header;
-    htp::content_t content;
+    htp::header_t header{};
+    htp::content_t content{};
     builder.build(fileName, &header, &content);
 
     this->m_socket->send(&header, htp::HEADER_SIZE);

@@ -6,9 +6,9 @@
 
 /* File Transfer Protocol */
 namespace ftp {
-    typedef struct {
+    struct header_t {
         size_t fileSize;
-    } header_t;
+    };
 
     const size_t HEADER_SIZE{ sizeof(header_t) };
 };

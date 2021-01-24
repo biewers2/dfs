@@ -6,15 +6,15 @@
 
 /* Hash Transfer Protocol */
 namespace htp {
-    typedef struct {
+    struct header_t {
         size_t fileNameSize;
         size_t hashSize;
-    } header_t;
+    };
 
-    typedef struct {
+    struct content_t {
         char* fileName;
         char* hash;
-    } content_t;
+    };
 
     const size_t HEADER_SIZE{ sizeof(header_t) };
     const size_t CONTENT_SIZE{ sizeof(content_t) };

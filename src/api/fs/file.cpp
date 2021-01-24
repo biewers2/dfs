@@ -13,6 +13,7 @@
 #include "exceptions/fs.h"
 #include "api/fs/file.h"
 
+namespace file {
 
 hashString_t
 hashContents(const std::string& fileName) {
@@ -33,6 +34,7 @@ hashContents(const std::string& fileName) {
     channelSwitch.AddDefaultRoute(crcFilter);
     channelSwitch.AddDefaultRoute(shaFilter);
 
+    // TODO Did you mean to construct an object on the stack here? It never gets used.
     FileSource(fileName.c_str(), true /*pumpAll*/, new Redirector(channelSwitch));
 
     return shaOutput;
@@ -40,9 +42,13 @@ hashContents(const std::string& fileName) {
 
 
 timestamp_t getLastModified(const std::string& fileName) {
-    struct stat fileStat;
+    struct stat fileStat{};
     stat(fileName.c_str(), &fileStat);
+#ifdef __APPLE__
+    return fileStat.st_mtimespec;
+#else
     return fileStat.st_mtim;
+#endif
 }
 
 size_t
@@ -69,4 +75,6 @@ getSizeOfFile(const std::string& fileName) {
 bool
 fileExists(const std::string& fileName) {
     return (access(fileName.c_str(), F_OK) != -1);
+}
+
 }

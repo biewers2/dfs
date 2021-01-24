@@ -14,8 +14,8 @@ StatusSender::StatusSender(Socket* socket) {
 void
 StatusSender::sendStatus(const std::string& fileName, const stp::FileStatus status) {
     STPBuilder builder;
-    stp::header_t header;
-    stp::content_t content;
+    stp::header_t header{};
+    stp::content_t content{};
     builder.build(fileName, status, &header, &content);
 
     this->m_socket->send(&header, stp::HEADER_SIZE);

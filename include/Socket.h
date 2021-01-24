@@ -8,8 +8,8 @@
 
 class Socket {
 public:
-    virtual void send(const void* data, const size_t dataSize) = 0;
-    virtual ssize_t recv(void* buffer, const size_t bufferSize) = 0;
+    virtual void send(const void* data, size_t dataSize) = 0;
+    virtual ssize_t recv(void* buffer, size_t bufferSize) = 0;
 };
 
 

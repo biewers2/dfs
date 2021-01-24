@@ -13,15 +13,17 @@
 
 class Server : public Socket {
 private:
-    int m_socketFd;
-    int m_clientSocketFd;
-    struct sockaddr_in m_address;
+    int m_socketFd{};
+    int m_clientSocketFd{};
+    struct sockaddr_in m_address{};
     
 public:
-    void initSocket(const int options, const int port);
+    virtual ~Server();
+
+    void initSocket(int options, int port);
     bool listenAndAccept();
-    void send(const void* data, const size_t dataSize) override;
-    ssize_t recv(void* buffer , const size_t bufferSize) override;
+    void send(const void* data, size_t dataSize) override;
+    ssize_t recv(void* buffer , size_t bufferSize) override;
     void close();
 };
 

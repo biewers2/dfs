@@ -11,14 +11,16 @@
 
 class Client : public Socket {
 private:
-    int m_socketFd;
-    struct sockaddr_in m_serverAddress;
+    int m_socketFd{};
+    struct sockaddr_in m_serverAddress{};
     
 public:
-    void initSocket(const std::string& address, const int port);
+    virtual ~Client();
+
+    void initSocket(const std::string& address, int port);
     void connect();
-    void send(const void* data, const size_t dataSize) override;
-    ssize_t recv(void* buffer, const size_t bufferSize) override;
+    void send(const void* data, size_t dataSize) override;
+    ssize_t recv(void* buffer, size_t bufferSize) override;
     void close();
 };
 

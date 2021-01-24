@@ -20,11 +20,11 @@ FileReceiver::recvDataIntoFile(const std::string& fileName) {
         throw FileOpenException();
     }
 
-    ftp::header_t* header = new ftp::header_t;
-    this->m_socket->recv((char*)header, ftp::HEADER_SIZE);
+    ftp::header_t header{};
+    this->m_socket->recv((char*)&header, ftp::HEADER_SIZE);
 
-    char* buffer = new char[BUFFER_SIZE];
-    size_t bytesToRead{ header->fileSize };
+    char buffer[BUFFER_SIZE];
+    size_t bytesToRead{ header.fileSize };
     while (true) {
         if (bytesToRead >= BUFFER_SIZE) {
             this->m_socket->recv(buffer, BUFFER_SIZE);
@@ -37,7 +37,5 @@ FileReceiver::recvDataIntoFile(const std::string& fileName) {
         bytesToRead -= BUFFER_SIZE;
     }
 
-    delete[] buffer;
-    delete header;
     outputStream.close();
 }

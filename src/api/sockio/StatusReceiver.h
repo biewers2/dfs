@@ -14,7 +14,7 @@ private:
     Socket* m_socket;
 
 public:
-    StatusReceiver(Socket* socket);
+    explicit StatusReceiver(Socket* socket);
     stp::FileStatus recvStatus(std::string& fileNameHolder);
 
     friend StatusIOTest;

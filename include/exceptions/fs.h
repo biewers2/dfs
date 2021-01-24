@@ -6,25 +6,25 @@
 
 class FileException : public std::exception {
 public:
-    virtual const char* what() const throw();
+    const char* what() const noexcept override;
 };
 
 
 class FilePathException : public FileException {
 public:
-    virtual const char* what() const throw();
+    const char* what() const noexcept override;
 };
 
 
 class FileOpenException : public FileException {
 public:
-    virtual const char* what() const throw();
+    const char* what() const noexcept override;
 };
 
 
 class FileDoesNotExistException : public FileException {
 public:
-    virtual const char* what() const throw();
+    const char* what() const noexcept override;
 };
 
 

@@ -15,8 +15,8 @@ private:
     Socket* m_socket;
 
 public:
-    HashReceiver(Socket* socket);
-    hashString_t recvHash(std::string& fileNameHolder);
+    explicit HashReceiver(Socket* socket);
+    file::hashString_t recvHash(std::string& fileNameHolder);
 
     friend HashIOTest;
 };

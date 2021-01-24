@@ -15,7 +15,7 @@ private:
     Socket* m_socket;
 
 public:
-    FileSender(Socket* socket);
+    explicit FileSender(Socket* socket);
     void sendDataFromFile(const std::string& fileName);
 
     friend FileIOTest;
