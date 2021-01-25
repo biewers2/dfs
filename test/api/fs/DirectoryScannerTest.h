@@ -8,17 +8,12 @@
 #include "fs/DirectoryScanner.h"
 
 
-const std::string MOCK_FILE{ "mock-file" };
-const std::string MOCK_DIRECTORY_TEST{ "test" };
-const std::string MOCK_DIRECTORY_TEST2{ "test2" };
-const std::string CURRENT_DIRECTORY{ "." };
-const std::string PARENT_DIRECTORY{ ".." };
-
-
 class DirectoryScannerTest : public ::testing::Test {
 protected:
     void SetUp() override;
     void TearDown() override;
+
+    const std::string ROOT{ "resources/DirectoryScannerTest/" };
 
     DirectoryScanner* m_scanner;
 };

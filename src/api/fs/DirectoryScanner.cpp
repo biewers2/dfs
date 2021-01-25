@@ -30,7 +30,6 @@ void DirectoryScanner::setDirectory(const std::string& dirName) {
     if (directory) {
         if (m_directory) {
             closedir(m_directory);
-            m_directory = nullptr;
         }
         m_directory = directory;
     } else {

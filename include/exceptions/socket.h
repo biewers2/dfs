@@ -6,6 +6,7 @@
 #include <cstring>
 #include <cerrno>
 
+
 class SocketException : public std::exception {
     const char* what() const noexcept override;
 };

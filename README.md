@@ -1,10 +1,14 @@
 # Distributed File System (dfs)
 
-To get the project to build, make sure conan is installed using _pip_
-<code>\$ pip install conan</code>
+### Building for the first time.
+#### Conan: <code>$ sudo pip install conan</code>
+
+In the directory _cmake-build-debug_...
 
 Then, in the directory _cmake-build-debug_, run
-<code>\$ conan install ..</code>
+1. <code>$ conan install ..</code>
+2. <code>$ cmake build ..</code>
+
 
 ## Preprocessor Order
   - Guard

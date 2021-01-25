@@ -2,7 +2,6 @@
 
 #include "test-util.h"
 #include "exceptions/fs.h"
-#include "protocols/htp.h"
 #include "HashIOTest.h"
 
 
@@ -12,10 +11,10 @@ TEST_F(HashIOTest, test_single_file) {
             hashString_t hashValue;
             std::string fileName;
             ASSERT_NO_THROW(hashValue = m_receiver->recvHash(fileName));
-            EXPECT_STREQ(hashContents(fileName).c_str(), hashValue.c_str());
+            EXPECT_STREQ(file::hashContents(fileName).c_str(), hashValue.c_str());
         },
         [=]() -> void {
-            ASSERT_NO_THROW(m_sender->sendHash("mock-fs/unit/mock-file"));
+            ASSERT_NO_THROW(m_sender->sendHash("resources/DirectoryScannerTest/mock-file"));
         }
     );
 }
@@ -30,12 +29,12 @@ TEST_F(HashIOTest, test_multiple_files) {
             std::string fileName;
             for (int i{ 0 }; i < NUM_FILES; ++i) {
                 ASSERT_NO_THROW(hashValue = m_receiver->recvHash(fileName));
-                EXPECT_STREQ(hashContents(fileName).c_str(), hashValue.c_str());
+                EXPECT_STREQ(file::hashContents(fileName).c_str(), hashValue.c_str());
             }
         },
         [=]() -> void {
             for (int i{ 0 }; i < NUM_FILES; ++i) {
-                ASSERT_NO_THROW(m_sender->sendHash("mock-fs/unit/mock-file"));
+                ASSERT_NO_THROW(m_sender->sendHash("resources/DirectoryScannerTest/mock-file"));
             }
         }
     );

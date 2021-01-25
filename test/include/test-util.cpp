@@ -4,7 +4,6 @@
 #include <vector>
 #include <string>
 
-
 #include "exceptions/fs.h"
 #include "test-util.h"
 
@@ -45,8 +44,7 @@ deleteFile(const std::string& fileName) {
 
 void
 touchFile(const std::string& fileName) {
-    std::ofstream touch(fileName);
-    touch.close();
+    std::ofstream(fileName).close();
 }
 
 

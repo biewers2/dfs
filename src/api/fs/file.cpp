@@ -34,7 +34,7 @@ hashContents(const std::string& fileName) {
     channelSwitch.AddDefaultRoute(crcFilter);
     channelSwitch.AddDefaultRoute(shaFilter);
 
-    // TODO Did you mean to construct an object on the stack here? It never gets used.
+    // Does hashing of file during object construction.
     FileSource(fileName.c_str(), true /*pumpAll*/, new Redirector(channelSwitch));
 
     return shaOutput;
@@ -47,7 +47,8 @@ timestamp_t getLastModified(const std::string& fileName) {
 #ifdef __APPLE__
     return fileStat.st_mtimespec;
 #else
-    return fileStat.st_mtim;
+    stat(fileName.c_str(), &fileStat);
+    return fileStat.st_atim;
 #endif
 }
 

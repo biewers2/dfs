@@ -1,16 +1,17 @@
 #include <string>
 
+#include "test-util.h"
 #include "fs/DirectoryScanner.h"
 #include "DirectoryScannerTest.h"
 
 
 void
 DirectoryScannerTest::SetUp() {
-    this->m_scanner = new DirectoryScanner();
+    m_scanner = new DirectoryScanner();
 }
 
 
 void
 DirectoryScannerTest::TearDown() {
-    delete this->m_scanner;
+    delete m_scanner;
 }

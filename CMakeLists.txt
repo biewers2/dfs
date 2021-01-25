@@ -19,7 +19,7 @@ file(GLOB CLIENT_SOURCE_FILES
         ${PROJECT_SOURCE_DIR}/src/client.cpp
         ${API_SOURCE_FILES})
 
-file(COPY ${PROJECT_SOURCE_DIR}/test/mock-fs DESTINATION ${CMAKE_BINARY_DIR}/bin)
+file(COPY ${PROJECT_SOURCE_DIR}/test/resources DESTINATION ${CMAKE_BINARY_DIR}/bin)
 
 add_executable(server
         ${SERVER_SOURCE_FILES}
