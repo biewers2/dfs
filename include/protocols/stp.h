@@ -10,14 +10,14 @@ namespace stp {
         NEWER, OLDER, GOOD
     };
 
-    typedef struct {
+    struct header_t {
         size_t fileNameSize;
-    } header_t;
+    };
 
-    typedef struct {
+    struct content_t {
         FileStatus status;
         char* fileName;
-    } content_t;
+    };
 
     const size_t HEADER_SIZE{ sizeof(header_t) };
     const size_t BODY_SIZE{ sizeof(content_t) };

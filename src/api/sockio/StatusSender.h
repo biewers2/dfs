@@ -13,8 +13,8 @@ private:
     Socket* m_socket;
 
 public:
-    StatusSender(Socket* socket);
-    void sendStatus(const std::string& fileName, const stp::FileStatus status);
+    explicit StatusSender(Socket* socket);
+    void sendStatus(const std::string& fileName, stp::FileStatus status);
 
     friend StatusIOTest;
 };

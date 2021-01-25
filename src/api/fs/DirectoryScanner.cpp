@@ -46,7 +46,7 @@ DirectoryScanner::getListOfFiles() {
     struct dirent* directoryEntry;
     while ((directoryEntry = readdir(m_directory)) != nullptr) {
         if (directoryEntry->d_type == DT_REG) {
-            fileEntries.push_back(directoryEntry->d_name);
+            fileEntries.emplace_back(directoryEntry->d_name);
         }
     }
 
@@ -64,7 +64,7 @@ DirectoryScanner::getListOfDirectories(bool ignoreDots) {
             if (ignoreDots && isDotDirectory(directoryEntry->d_name)) {
                 continue;
             }
-            directoryEntries.push_back(directoryEntry->d_name);
+            directoryEntries.emplace_back(directoryEntry->d_name);
         }
     }
 
@@ -81,7 +81,7 @@ DirectoryScanner::getListOfAllContents(bool ignoreDots) {
         if (ignoreDots && isDotDirectory(directoryEntry->d_name)) {
             continue;
         }
-        entries.push_back(directoryEntry->d_name);
+        entries.emplace_back(directoryEntry->d_name);
     }
     return entries;
 }

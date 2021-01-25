@@ -19,11 +19,11 @@ void FileSender::sendDataFromFile(const std::string& fileName) {
         throw FileOpenException();
     }
 
-    ftp::header_t* header = new ftp::header_t{ getSizeOfFile(fileName) };
-    this->m_socket->send(header, ftp::HEADER_SIZE);
+    ftp::header_t header{ file::getSizeOfFile(fileName) };
+    this->m_socket->send(&header, ftp::HEADER_SIZE);
 
-    char* buffer = new char[BUFFER_SIZE];
-    size_t bytesToRead{ header->fileSize };
+    char buffer[BUFFER_SIZE];
+    size_t bytesToRead{ header.fileSize };
     while (true) {
         if (bytesToRead >= BUFFER_SIZE) {
             inputStream.read(buffer, BUFFER_SIZE);
@@ -36,7 +36,5 @@ void FileSender::sendDataFromFile(const std::string& fileName) {
         bytesToRead -= BUFFER_SIZE;
     }
 
-    delete[] buffer;
-    delete header;
     inputStream.close();
 }

@@ -8,6 +8,10 @@
 #include "Client.h"
 
 
+Client::~Client() {
+    close();
+}
+
 void
 Client::initSocket(const std::string& address, const int port) {
     m_socketFd = socket(AF_INET, SOCK_STREAM, 0);

@@ -11,7 +11,7 @@ HTPBuilder::buildEmpty(const htp::header_t* header, htp::content_t* dataHolder) 
 
 void
 HTPBuilder::build(const std::string& fileName, htp::header_t* headerHolder, htp::content_t* dataHolder) {
-    hashString_t hashValue{ hashContents(fileName) };
+    file::hashString_t hashValue{ file::hashContents(fileName) };
     headerHolder->fileNameSize = fileName.size() + 1;
     headerHolder->hashSize = hashValue.size() + 1;
 

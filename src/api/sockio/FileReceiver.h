@@ -15,7 +15,7 @@ private:
     Socket* m_socket;
 
 public:
-    FileReceiver(Socket* socket);
+    explicit FileReceiver(Socket* socket);
     void recvDataIntoFile(const std::string& fileName);
 
     friend FileIOTest;

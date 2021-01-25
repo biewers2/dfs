@@ -12,7 +12,7 @@ private:
     Socket* m_socket;
 
 public:
-    HashSender(Socket* socket);
+    explicit HashSender(Socket* socket);
     void sendHash(const std::string& fileName);
 
     friend HashIOTest;

@@ -6,6 +6,10 @@
 #include "Server.h"
 
 
+Server::~Server() {
+    close();
+}
+
 void
 Server::initSocket(const int options, const int port) {
     m_socketFd = socket(AF_INET, SOCK_STREAM, 0);

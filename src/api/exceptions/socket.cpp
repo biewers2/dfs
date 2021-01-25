@@ -2,48 +2,49 @@
 
 
 const char*
-SocketException::what() const throw() {
+SocketException::what() const noexcept {
     return "An error occurred relating to a socket operation.";
 }
 
 
 const char*
-SocketInitException::what() const throw() {
+SocketInitException::what() const noexcept {
     return "Socket failed to initialize.";
 }
 
 
+
 const char*
-SocketOptionException::what() const throw() {
-    return "Socket options failed to set.";
+SocketOptionException::what() const noexcept {
+    return m_what.c_str();
 }
 
 
 const char*
-SocketBindException::what() const throw() {
+SocketBindException::what() const noexcept {
     return "Socket failed to bind port.";
 }
 
 
 const char*
-SocketListenException::what() const throw() {
+SocketListenException::what() const noexcept {
     return "Socket failed to listen.";
 }
 
 
 const char*
-SocketAcceptException::what() const throw() {
+SocketAcceptException::what() const noexcept {
     return "Socket failed to accept incoming connection.";
 }
 
 
 const char*
-SocketAddressException::what() const throw() {
+SocketAddressException::what() const noexcept {
     return "Socket address was invalid or not supported.";
 }
 
 
 const char*
-SocketConnectionException::what() const throw() {
+SocketConnectionException::what() const noexcept {
     return "Socket failed to connect to server.";
 }

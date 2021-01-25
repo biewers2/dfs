@@ -4,22 +4,25 @@
 #include <string>
 #include <cstdio>
 
+namespace file {
 
-typedef struct timespec timestamp_t;
-typedef std::string hashString_t;
+using timestamp_t = struct timespec;
+using hashString_t = std::string;
 
 enum FileStatus {
     GOOD, NEWER, OLDER
 };
 
-std::string hashContents(const std::string& fileName);
+std::string hashContents(const std::string &fileName);
 
-timestamp_t getLastModified(const std::string& fileName);
+timestamp_t getLastModified(const std::string &fileName);
 
-size_t getSizeOfFile(FILE* fd);
-size_t getSizeOfFile(const std::string& fileName);
+size_t getSizeOfFile(FILE *fd);
 
-bool fileExists(const std::string& fileName);
+size_t getSizeOfFile(const std::string &fileName);
 
+bool fileExists(const std::string &fileName);
+
+};
 
 #endif // __DFS_FILE_H__
