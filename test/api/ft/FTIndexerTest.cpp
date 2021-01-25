@@ -1,13 +1,13 @@
 #include <string>
 
-#include "ft/FTIndexer.h"
+#include "ft/FileIndexer.h"
 #include "FTIndexerTest.h"
 
 
 void
 FTIndexerTest::SetUp() {
-    m_index = new FTIndex();
-    m_indexer = new FTIndexer(m_index);
+    m_index = new FileIndex();
+    m_indexer = new FileIndexer(m_index);
 }
 
 

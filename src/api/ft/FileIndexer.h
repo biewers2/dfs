@@ -4,7 +4,7 @@
 #include <string>
 #include <unordered_map>
 #include "api/fs/timestamp.h"
-#include "FTIndex.h"
+#include "FileIndex.h"
 
 
 typedef std::unordered_map<std::string, timestamp_t>::iterator ftIterator_t;
@@ -12,17 +12,20 @@ typedef std::unordered_map<std::string, timestamp_t>::iterator ftIterator_t;
 
 class FTIndexerTest;
 
-class FTIndexer {
+class FileIndexer {
 private:
-    FTIndex* m_indexObject;
+    FileIndex::FileIndexData getData(const std::string& fileName);
+
+    FileIndex* m_indexObject;
 
 public:
-    FTIndexer(FTIndex* index);
+    FileIndexer(FileIndex* index);
 
-    timestamp_t at(const std::string& fileName);
+    timestamp_t getTimestamp(const std::string& fileName);
+    hashString_t getHashString(const std::string& fileName);
     bool contains(const std::string& fileName);
 
-    void insert(const std::string& fileName, const timestamp_t& timestamp);
+    void insert(const std::string& fileName, const timestamp_t& timestamp, const hashString_t& hash);
     void erase(const std::string& fileName);
 
     friend FTIndexerTest;

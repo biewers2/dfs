@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 
-#include "ft/FTIndexer.h"
+#include "ft/FileIndexer.h"
 
 
 class FTIndexerTest : public ::testing::Test {
@@ -15,8 +15,8 @@ protected:
 
     const std::string FILE_NAME{ "FTIndexerTestAPI_randomFile" };
 
-    FTIndex* m_index;
-    FTIndexer* m_indexer;
+    FileIndex* m_index;
+    FileIndexer* m_indexer;
 };
 
 

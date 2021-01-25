@@ -2,19 +2,19 @@
 #define __DFS_FT_INDEX_WRITER_H__
 
 #include <fstream>
-#include "FTIndex.h"
+#include "FileIndex.h"
 
 
-class FTIndexWriter {
+class FileIndexWriter {
 private:
-    FTIndex* m_indexObject;
+    FileIndex* m_indexObject;
     std::string m_outputFileName;
 
 public:
-    FTIndexWriter(FTIndex* index);
-    FTIndexWriter(const std::string& fileName, FTIndex* index);
+    FileIndexWriter(FileIndex* index);
+    FileIndexWriter(const std::string& fileName, FileIndex* index);
 
-    void setIndex(FTIndex* index);
+    void setIndex(FileIndex* index);
     void setOutputFile(const std::string& fileName);
 
     void write();

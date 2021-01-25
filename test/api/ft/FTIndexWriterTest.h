@@ -6,8 +6,8 @@
 #include <gtest/gtest.h>
 
 #include "ResourceTest.h"
-#include "ft/FTIndexReader.h"
-#include "ft/FTIndexWriter.h"
+#include "ft/FileIndexReader.h"
+#include "ft/FileIndexWriter.h"
 #include "api/fs/timestamp.h"
 
 
@@ -20,8 +20,8 @@ protected:
 
     std::string buildResourcesPath(const std::string& pathString) override;
 
-    FTIndex* m_index;
-    FTIndexWriter* m_indexWriter;
+    FileIndex* m_index;
+    FileIndexWriter* m_indexWriter;
 };
 
 

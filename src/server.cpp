@@ -6,6 +6,11 @@
 
 
 int main(int argc, char const* argv[]) {
+    /*
+     * 1. Constantly wait and read for hash (HashRecv)
+     * 2. When hash received, compare hash to file on hand's hash.
+     * 3. If different, look up time
+     */
     try {
         Server* server = new Server();
         FileReceiver* receiver = new FileReceiver(server);
